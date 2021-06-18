@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sundeinfo.sypglass.relay.mapper.oa.OriginalDepartmentMapper">
+    <resultMap id="hrmSubCompanyResultMap" type="com.sundeinfo.sypglass.relay.model.oa.HrmSubCompany">
+        <constructor>
+            <arg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="subcompanyname" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="subcompanydesc" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="companyid" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="supsubcomid" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="canceled" javaType="java.lang.String" jdbcType="CHAR" />
+            <arg column="subcompanycode" javaType="java.lang.String" jdbcType="VARCHAR" />
+        </constructor>
+    </resultMap>
+
+    <resultMap id="hrmDepartmentResultMap" type="com.sundeinfo.sypglass.relay.model.oa.HrmDepartment">
+        <constructor>
+            <arg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="departmentmark" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="departmentname" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="subcompanyid1" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="supdepid" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="canceled" javaType="java.lang.String" jdbcType="CHAR" />
+            <arg column="departmentcode" javaType="java.lang.String" jdbcType="VARCHAR" />
+        </constructor>
+    </resultMap>
+
+    <select id="selectAllHrmSubCompany" resultMap="hrmSubCompanyResultMap">
+        SELECT id,subcompanyname,subcompanydesc,companyid,supsubcomid,canceled,subcompanycode
+        FROM  HrmSubCompany
+    </select>
+
+    <select id="selectAllHrmDepartment" resultMap="hrmDepartmentResultMap">
+        SELECT id,departmentmark,departmentname,subcompanyid1,supdepid,canceled,departmentcode
+        FROM  HrmDepartment
+    </select>
+</mapper>

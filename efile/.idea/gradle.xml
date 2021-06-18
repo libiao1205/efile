@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="distributionType" value="LOCAL" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleHome" value="$PROJECT_DIR$/../../../../../../../Tools/gradle-4.7" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/efile.sypglass" />
+            <option value="$PROJECT_DIR$/efile.sypglass.organization" />
+            <option value="$PROJECT_DIR$/efile.sypglass.relay" />
+            <option value="$PROJECT_DIR$/efile.sypglass.solr" />
+            <option value="$PROJECT_DIR$/sundeinfo.core" />
+            <option value="$PROJECT_DIR$/sundeinfo.file" />
+            <option value="$PROJECT_DIR$/sundeinfo.security" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

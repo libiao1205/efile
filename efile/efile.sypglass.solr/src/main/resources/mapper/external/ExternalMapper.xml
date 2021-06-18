@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sundeinfo.sypglass.solr.mapper.external.ExternalMapper">
+  <select id="selectSql" resultType="java.util.LinkedHashMap">
+    select ${fields} from ${tableName}
+    <if test="whereCondition != null and whereCondition != ''">
+      where ${whereCondition}
+    </if>
+    <if test="orderCondition != null and orderCondition != ''">
+      order by ${orderCondition}
+    </if>
+    <if test="pageNum != null and pageSize != null and pageSize != 0">
+      limit ${pageNum},${pageSize}
+    </if>
+  </select>
+
+  <select id="selectSqlServer" resultType="java.util.LinkedHashMap">
+    <if test="orderCondition != null and orderCondition != ''">
+      select *  from (select ROW_NUMBER() OVER(order by ${orderCondition}) as serialNumber,* from ${tableName}
+      where 1=1 )as yyyy  where serialNumber between (${pageNum} - ${pageSize}) and ${pageNum}
+    </if>
+  </select>
+
+  <select id="selectSqlCount" resultType="java.lang.Integer">
+    select count(*) from ${tableName}
+    <if test="whereCondition != null and whereCondition != ''">
+      where ${whereCondition}
+    </if>
+  </select>
+
+  <insert id="insertSql">
+		insert into ${tableName} ${result}
+  </insert>
+
+  <update id="updateSql">
+		UPDATE ${tableName} SET ${result} WHERE ${whereCondition}
+  </update>
+
+  <delete id="deleteSql">
+		delete from ${tableName} WHERE ${whereCondition}
+  </delete>
+</mapper>

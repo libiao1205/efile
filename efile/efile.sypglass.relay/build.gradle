@@ -1,0 +1,51 @@
+
+apply plugin: 'org.springframework.boot'
+
+dependencies {
+
+    compile (
+            project(':sundeinfo.core'),
+            project(':sundeinfo.file'),
+            project(':sundeinfo.security')
+    )
+
+    compile fileTree(dir:'/lib',include:['*.jar'])
+
+    /** Apache Commons FileUpload  */
+    compile group: 'commons-fileupload', name: 'commons-fileupload', version: '1.4'
+
+    /** MySql数据库配置 */
+    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.11'
+
+//    /** SqlServer配置 */
+//    //compile group: 'com.microsoft.sqlserver', name: 'mssql-jdbc', version: '7.0.0.jre8'
+//    // vpn环境下用微软的包会有链接问题，这里用sourceforge的第三方jdbc包
+//    compile group: 'net.sourceforge.jtds', name: 'jtds', version: '1.2.7'
+
+    /** mybatis配置 */
+    compile group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: '1.3.2'
+    compile group: 'org.mybatis.generator', name: 'mybatis-generator-core', version: '1.3.7'
+    compile group: 'org.mybatis.generator', name: 'mybatis-generator-maven-plugin', version: '1.3.7'
+}
+
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "gradle.plugin.com.arenagod.gradle:mybatis-generator-plugin:1.4"
+    }
+}
+
+apply plugin: "com.arenagod.gradle.MybatisGenerator"
+
+configurations {
+    mybatisGenerator
+}
+
+mybatisGenerator {
+    verbose = true
+    configFile = 'src/main/resources/tools/generatorConfig-relay.xml'
+}

@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Sypglass">
+    <output-path>$PROJECT_DIR$/../..</output-path>
+    <root id="archive" name="Sypglass.war">
+      <element id="artifact" artifact-name="Gradle : efile : efile.sypglass.war (exploded)" />
+      <element id="artifact" artifact-name="Gradle : efile : sundeinfo.core.war (exploded)" />
+      <element id="artifact" artifact-name="Gradle : efile : sundeinfo.file.war (exploded)" />
+      <element id="artifact" artifact-name="Gradle : efile : sundeinfo.security.war (exploded)" />
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/efile.sypglass/META-INF/MANIFEST.MF" />
+      </element>
+    </root>
+  </artifact>
+</component>

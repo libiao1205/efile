@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sundeinfo.sypglass.mapper.BlockedFolderIpMapper">
+  <resultMap id="BaseResultMap" type="com.sundeinfo.sypglass.model.BlockedFolderIp">
+    <constructor>
+      <idArg column="sequence" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="folderid" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="ipinfo" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="status" javaType="java.lang.Byte" jdbcType="TINYINT" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    sequence, id, folderid, ipinfo, status
+  </sql>
+  <select id="selectByExample" parameterType="com.sundeinfo.sypglass.model.BlockedFolderIpExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from b_blockedfolderip
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from b_blockedfolderip
+    where sequence = #{sequence,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from b_blockedfolderip
+    where sequence = #{sequence,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sundeinfo.sypglass.model.BlockedFolderIpExample">
+    delete from b_blockedfolderip
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sundeinfo.sypglass.model.BlockedFolderIp">
+    insert into b_blockedfolderip (sequence, id, folderid, 
+      ipinfo, status)
+    values (#{sequence,jdbcType=BIGINT}, #{id,jdbcType=BIGINT}, #{folderid,jdbcType=BIGINT}, 
+      #{ipinfo,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sundeinfo.sypglass.model.BlockedFolderIp">
+    insert into b_blockedfolderip
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sequence != null">
+        sequence,
+      </if>
+      <if test="id != null">
+        id,
+      </if>
+      <if test="folderid != null">
+        folderid,
+      </if>
+      <if test="ipinfo != null">
+        ipinfo,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sequence != null">
+        #{sequence,jdbcType=BIGINT},
+      </if>
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="folderid != null">
+        #{folderid,jdbcType=BIGINT},
+      </if>
+      <if test="ipinfo != null">
+        #{ipinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sundeinfo.sypglass.model.BlockedFolderIpExample" resultType="java.lang.Long">
+    select count(*) from b_blockedfolderip
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update b_blockedfolderip
+    <set>
+      <if test="record.sequence != null">
+        sequence = #{record.sequence,jdbcType=BIGINT},
+      </if>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.folderid != null">
+        folderid = #{record.folderid,jdbcType=BIGINT},
+      </if>
+      <if test="record.ipinfo != null">
+        ipinfo = #{record.ipinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update b_blockedfolderip
+    set sequence = #{record.sequence,jdbcType=BIGINT},
+      id = #{record.id,jdbcType=BIGINT},
+      folderid = #{record.folderid,jdbcType=BIGINT},
+      ipinfo = #{record.ipinfo,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=TINYINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sundeinfo.sypglass.model.BlockedFolderIp">
+    update b_blockedfolderip
+    <set>
+      <if test="id != null">
+        id = #{id,jdbcType=BIGINT},
+      </if>
+      <if test="folderid != null">
+        folderid = #{folderid,jdbcType=BIGINT},
+      </if>
+      <if test="ipinfo != null">
+        ipinfo = #{ipinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where sequence = #{sequence,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sundeinfo.sypglass.model.BlockedFolderIp">
+    update b_blockedfolderip
+    set id = #{id,jdbcType=BIGINT},
+      folderid = #{folderid,jdbcType=BIGINT},
+      ipinfo = #{ipinfo,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT}
+    where sequence = #{sequence,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,297 @@
+html, body, div, section, header, footer, aside, ul, ol, li, table, tr, th, td, button, input, textarea, select, h1, h2, h3, h4, h5, h6, em, i, strong, p, span, blockquote {
+    margin: 0;
+    padding: 0;
+}
+h1, h2, h3, h4, h5, h6, em, th, i, strong, input, textarea, button, select {
+    font-weight: normal;
+    font-style: normal;
+    font-size: 100%;
+}
+ul, ol {
+    list-style: none;
+    vertical-align: top;
+}
+table, td, th {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+input, button, select, textarea {
+    outline: none;
+    background: none;
+}
+textarea {
+    resize: none;
+}
+img, a img {
+    border: none;
+    vertical-align: top;
+}
+a, a:link, a:active, a:visited {
+    color: $linkColor;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+a:hover {
+    color: $linkColor;
+}
+html {
+    height: 100%;
+}
+body {
+    font-size: $fontSize;
+    font-family: $fontFamily;
+    color: $fontColor;
+    height: 100%;
+}
+.fl {
+    float: left;
+}
+.fr {
+    float: right;
+}
+.fc {
+    margin: 0 auto;
+}
+.vertical-middle {
+    vertical-align: middle;
+}
+
+/**显示隐藏**/
+.hidden {
+    display: none;
+}
+.clear:after {
+    content: "";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    height: 0;
+}
+.overflow {
+    overflow: hidden;
+}
+
+.ib{
+    display: inline-block;
+}
+
+/**定位**/
+
+.posR {
+    position: relative;
+}
+.posA {
+    position: absolute;
+}
+.posF {
+    position: fixed;
+}
+.fb {
+    font-weight: bold;
+}
+.textL {
+    text-align: left;
+}
+.textC {
+    text-align: center;
+}
+.textR {
+    text-align: right;
+}
+.text2em {
+    text-indent: 2em;
+}
+.word-hidden {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+//flex布局
+//上下居中
+.fxc{
+    display: flex;
+    display: -webkit-flex;
+    align-items:center;
+}
+//水平居中
+.fx-lr-c{
+    display: flex;
+    display: -webkit-flex;
+    align-items:center;
+    justify-content:center;
+}
+//从上到下 垂直居中 水平居中
+.fx-t-b{
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content:center;
+}
+
+//上下居中，左右对齐
+.fxb {
+    display: flex;
+    display: -webkit-flex;
+    align-items:center;
+    justify-content: space-between;
+}
+
+//上下居中，左对齐
+.fxr {
+    display: flex;
+    align-items: center;
+}
+//居左
+.fxl {
+    display: flex;
+    justify-content: flex-start;
+}
+//两端对齐
+.fx-lr{
+    display: flex;
+    justify-content: space-between;
+}
+
+//内边距
+.plr10{
+    padding: 0 10px;
+}
+
+.pl10{
+    padding: 0 10px;
+}
+
+.pt10{
+    padding-top: 10px;
+}
+
+.pd0 {
+    padding: 0px;
+}
+
+.pr0 {
+    padding-right: 0px;
+}
+
+.pd5{
+    padding: 5px;
+}
+
+.pd10{
+    padding: 10px;
+}
+.pdr20{
+    padding-right: 20px;
+}
+
+.mg10{
+    margin: 10px;
+}
+
+.mg20{
+    margin: 20px;
+}
+
+.mt10{
+    margin-top: 10px;
+}
+.mb10{
+    margin-bottom: 10px;
+}
+.ml20{
+    margin-left: 20px;
+}
+.mr20{
+    margin-right: 20px;
+}
+
+//线条
+.bt1{
+    border-top: 1px solid $lightGray;
+}
+
+.bb1{
+    border-bottom: 1px solid $lightGray;
+}
+
+.bl1{
+    border-left: 1px solid $lightGray;
+}
+
+.tnl{
+    text-decoration-line:none;
+}
+
+/**svg**/
+.icon {
+    width: 1.2em; height: 1.2em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+}
+
+/**lement-ui**/
+.el-container,
+.el-menu,
+.el-scrollbar{
+    height: 100%;
+}
+
+.el-menu-item .icon,.el-submenu__title .icon {
+    margin-right: 5px;
+    width: 24px;
+    text-align: center;
+    font-size: 18px;
+    vertical-align: middle;
+}
+
+.el-table th.gutter{
+    display: table-cell!important;
+}
+
+.el-table colgroup.gutter{
+    display: table-cell!important;
+}
+
+//.el-scrollbar__wrap{
+//    overflow: auto;
+//}
+
+.el-tree--highlight-current .el-tree-node.is-current > .el-tree-node__content {
+    background-color: #F6FAFC;
+    font-size: 14px;
+    font-family: Source Han Sans CN;
+    font-weight: 400;
+    color: #0084DC;
+}
+
+.el-tree-node__content{
+    border-radius: 3px;
+}
+
+.splitter-pane-resizer.vertical.active{
+    background: #000!important;
+    opacity: 0.1!important;;
+}
+
+.iconfont {
+    font-size:100% !important;
+}
+
+//todo
+.el-loading-mask{
+    left:1px;
+}
+
+//fontsize
+.fnt-s20{
+    font-size:20px;
+}
+
+.input-width{
+    width: 240px;
+}
+.finger{
+    cursor:pointer;
+}
+

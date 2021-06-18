@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sundeinfo.sypglass.mapper.LinkResourceMapper">
+  <resultMap id="BaseResultMap" type="com.sundeinfo.sypglass.model.LinkResource">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="linkid" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="resourceid" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="kind" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="suffix" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="metadataValue" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, linkid, resourceid, kind, name, suffix, metadataValue
+  </sql>
+  <select id="selectByExample" parameterType="com.sundeinfo.sypglass.model.LinkResourceExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from u_linkresource
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from u_linkresource
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from u_linkresource
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sundeinfo.sypglass.model.LinkResourceExample">
+    delete from u_linkresource
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sundeinfo.sypglass.model.LinkResource" keyProperty="id"
+          keyColumn="ID" useGeneratedKeys="true">
+    insert into u_linkresource (id, linkid, resourceid, 
+      kind, name, suffix, 
+      metadataValue)
+    values (#{id,jdbcType=BIGINT}, #{linkid,jdbcType=BIGINT}, #{resourceid,jdbcType=BIGINT}, 
+      #{kind,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{suffix,jdbcType=VARCHAR}, 
+      #{metadatavalue,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sundeinfo.sypglass.model.LinkResource">
+    insert into u_linkresource
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="linkid != null">
+        linkid,
+      </if>
+      <if test="resourceid != null">
+        resourceid,
+      </if>
+      <if test="kind != null">
+        kind,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="suffix != null">
+        suffix,
+      </if>
+      <if test="metadatavalue != null">
+        metadataValue,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="linkid != null">
+        #{linkid,jdbcType=BIGINT},
+      </if>
+      <if test="resourceid != null">
+        #{resourceid,jdbcType=BIGINT},
+      </if>
+      <if test="kind != null">
+        #{kind,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="suffix != null">
+        #{suffix,jdbcType=VARCHAR},
+      </if>
+      <if test="metadatavalue != null">
+        #{metadatavalue,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sundeinfo.sypglass.model.LinkResourceExample" resultType="java.lang.Long">
+    select count(*) from u_linkresource
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update u_linkresource
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.linkid != null">
+        linkid = #{record.linkid,jdbcType=BIGINT},
+      </if>
+      <if test="record.resourceid != null">
+        resourceid = #{record.resourceid,jdbcType=BIGINT},
+      </if>
+      <if test="record.kind != null">
+        kind = #{record.kind,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.suffix != null">
+        suffix = #{record.suffix,jdbcType=VARCHAR},
+      </if>
+      <if test="record.metadatavalue != null">
+        metadataValue = #{record.metadatavalue,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update u_linkresource
+    set id = #{record.id,jdbcType=BIGINT},
+      linkid = #{record.linkid,jdbcType=BIGINT},
+      resourceid = #{record.resourceid,jdbcType=BIGINT},
+      kind = #{record.kind,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      suffix = #{record.suffix,jdbcType=VARCHAR},
+      metadataValue = #{record.metadatavalue,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sundeinfo.sypglass.model.LinkResource">
+    update u_linkresource
+    <set>
+      <if test="linkid != null">
+        linkid = #{linkid,jdbcType=BIGINT},
+      </if>
+      <if test="resourceid != null">
+        resourceid = #{resourceid,jdbcType=BIGINT},
+      </if>
+      <if test="kind != null">
+        kind = #{kind,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="suffix != null">
+        suffix = #{suffix,jdbcType=VARCHAR},
+      </if>
+      <if test="metadatavalue != null">
+        metadataValue = #{metadatavalue,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sundeinfo.sypglass.model.LinkResource">
+    update u_linkresource
+    set linkid = #{linkid,jdbcType=BIGINT},
+      resourceid = #{resourceid,jdbcType=BIGINT},
+      kind = #{kind,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      suffix = #{suffix,jdbcType=VARCHAR},
+      metadataValue = #{metadatavalue,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

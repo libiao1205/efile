@@ -1,0 +1,154 @@
+.sys-app,
+.top-menu-group,
+.top-menu-item,
+.sys-content
+{
+    height: 100%;
+}
+.apphead{
+    background-color: $newThemeColor;
+    h1{
+        font-size: $headerFontSize;
+    }
+}
+.apphead1{
+    background-color: $themeColor;
+    h1{
+        font-size: $headerFontSize;
+    }
+}
+
+.top-menu-item:hover {
+    background: $hoverColor;
+}
+
+.top-menu-item{
+    border: 1px solid #dddddd;
+    border-bottom: none;
+}
+
+.top-menu-item + .top-menu-item{
+    border-left: none;
+}
+
+.app-title{
+    background-color: $themeGray;
+}
+
+.top-menu-group .el-dropdown{
+    height: 100%;
+    display: inline-flex;
+    display: -webkit-flex;
+    align-items:center;
+}
+.top-menu-group .el-dropdown .el-dropdown-link{
+    height: 100%;
+    cursor: pointer;
+    display: inline-flex;
+    display: -webkit-flex;
+    align-items:center;
+}
+
+.el-tag {
+    margin-right: 10px;
+}
+
+.btn-custom-cancel {
+    float: right;
+    margin-left: 10px;
+}
+
+.el-checkbox+.el-checkbox {
+    margin-left: 0px;
+}
+.el-checkbox {
+    margin-right: 25px;
+}
+
+.button-new-tag {
+    height: 32px;
+    line-height: 30px;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.input-new-tag {
+    width: 90px;
+    vertical-align: bottom;
+}
+
+.el-dialog{
+    border-radius:5px;
+    .el-dialog__header{
+        position: relative;
+        padding:20px;
+        background-color: $themeColor;
+        height: 10px;
+        margin: 0;
+        display: block;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        text-align: center;
+        letter-spacing: 2px;
+        .el-dialog__title{
+            line-height:24px;
+            font-size:18px;
+            color:white;
+            font-weight: bold;
+
+        }
+        .el-dialog__headerbtn{
+            .el-dialog__close{
+                font-weight: bold;
+                color:white;
+            }
+        }
+    }
+}
+
+.custom-tree-node {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .el-button.is-circle{
+        padding:0px;
+        font-size:20px;
+        margin-left:5px;
+    }
+    .btnAdd{
+        color: #67c23a;
+    }
+    .btnEdit{
+        color: #e6a23c;
+    }
+    .btnMove{
+        color: #e6a23c;
+    }
+    .btnDel{
+        color: #f56c6c;
+    }
+    .btnAddUser{
+        color: #67c23a;
+    }
+}
+
+.custom-table-cell {
+    .el-button.is-circle{
+        padding:0px;
+        font-size:20px;
+        margin-left:5px;
+    }
+    .btnAdd{
+        color: #67c23a;
+    }
+    .btnEdit{
+        color: #e6a23c;
+    }
+    .btnDel{
+        color: #f56c6c;
+    }
+}
+
+
+
+

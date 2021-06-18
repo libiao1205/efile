@@ -1,0 +1,40 @@
+dependencies {
+
+    compile (
+            project(':sundeinfo.core')
+    )
+    compile fileTree(dir:'/lib',include:['*.jar'])
+
+    // https://mvnrepository.com/artifact/org.jodconverter/jodconverter-core
+    compile group: 'org.jodconverter', name: 'jodconverter-core', version: '4.1.1'
+    // https://mvnrepository.com/artifact/org.jodconverter/jodconverter-local
+    compile group: 'org.jodconverter', name: 'jodconverter-local', version: '4.1.1'
+    // https://mvnrepository.com/artifact/org.jodconverter/jodconverter-spring-boot-starter
+    compile group: 'org.jodconverter', name: 'jodconverter-spring-boot-starter', version: '4.1.1'
+
+    // https://mvnrepository.com/artifact/com.itextpdf/itextpdf
+    compile group: 'com.itextpdf', name: 'itextpdf', version: '5.5.13'
+    // https://mvnrepository.com/artifact/com.itextpdf/itext-asian
+    compile group: 'com.itextpdf', name: 'itext-asian', version: '5.2.0'
+
+    // https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk15on
+    compile group: 'org.bouncycastle', name: 'bcprov-jdk15on', version: '1.49'
+    // https://mvnrepository.com/artifact/org.bouncycastle/bcmail-jdk15on
+    compile group: 'org.bouncycastle', name: 'bcmail-jdk15on', version: '1.49'
+
+    // https://mvnrepository.com/artifact/org.apache.poi/poi
+    compile group: 'org.apache.poi', name: 'poi', version: '4.0.0'
+    // https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml
+    compile group: 'org.apache.poi', name: 'poi-ooxml', version: '4.0.0'
+    // https://mvnrepository.com/artifact/org.apache.poi/poi-scratchpad
+    compile group: 'org.apache.poi', name: 'poi-scratchpad', version: '4.0.0'
+
+}
+
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+}

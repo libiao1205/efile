@@ -1,0 +1,102 @@
+group 'com.sundeinfo'
+version '1.0.0.0'
+
+apply plugin: 'org.springframework.boot'
+
+buildscript {
+    ext {
+        springBootVersion = '1.5.8.RELEASE'
+        springBootLog4JVersion = '1.3.8.RELEASE'
+    }
+    repositories {
+        mavenLocal()
+        maven{url 'http://maven.aliyun.com/nexus/content/groups/public'}
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+configurations {
+    provided
+}
+
+allprojects{
+    apply plugin: 'java'
+    apply plugin: 'idea'
+    apply plugin: 'war'
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    repositories {
+        mavenLocal()
+        maven{url 'http://maven.aliyun.com/nexus/content/groups/public'}
+        mavenCentral()
+    }
+}
+
+
+subprojects{
+    tasks.withType(JavaCompile) {
+        options.encoding = "UTF-8"
+    }
+
+    dependencies {
+        compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
+        providedRuntime("org.springframework.boot:spring-boot-starter-tomcat:${springBootVersion}")
+        [
+                "org.springframework.boot:spring-boot-starter-aop:${springBootVersion}",/** Aop用配置 */
+                "org.springframework.boot:spring-boot-starter-security:${springBootVersion}",/*Security用配置*/
+                "org.springframework.boot:spring-boot-starter-cache:${springBootVersion}",/** Cache配置 */
+                //"org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}",/*Actuator配置*/
+                //"org.springframework.boot:spring-boot-starter-log4j2:${springBootVersion}",/** Log用配置 */
+                "org.springframework.boot:spring-boot-starter-log4j:${springBootLog4JVersion}",/** Log用配置 */
+                "com.github.pagehelper:pagehelper:4.2.1",/** 分页配置 */
+                "org.projectlombok:lombok:1.18.2",/** lombok */
+        ].each { dep ->
+            compile(dep) {
+                exclude module: "spring-boot-starter-logging"
+                exclude module: "logback-classic"
+            }
+        }
+
+        // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
+        compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.8.1'
+
+        /** swagger用配置 */
+        compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.6.1'
+        compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.6.1'
+
+        // https://mvnrepository.com/artifact/javassist/javassist
+        compile group: 'javassist', name: 'javassist', version: '3.12.0.GA'
+
+        /** 测试用配置 */
+        testCompile "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
+
+    }
+
+    configurations {
+        compile.exclude group:'ch.qos.logback'
+        all*.exclude group: 'commons-logging', module: 'commons-logging'
+        all*.exclude group: 'org.slf4j', module: 'log4j-over-slf4j'
+    }
+}
+
+/**
+ * idea 里面忽略根项目，也就是说不将根项目设置为 module
+ */
+gradle.projectsEvaluated {
+    gradle.rootProject {
+        ideaModule.enabled = false
+        idea {
+            project {
+                modules = subprojects*.idea.module
+//                 如果某个子项目的 ideaModule 设置为 false，则不会在 idea 中生成 module
+//                def modulesToInclude = subprojects.findAll {it.ideaModule.enabled == true}
+//                modules = modulesToInclude.idea.module
+            }
+        }
+    }
+}

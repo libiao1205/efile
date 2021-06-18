@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sundeinfo.sypglass.relay.mapper.relay.OASchemaMapper">
+  <resultMap id="BaseResultMap" type="com.sundeinfo.sypglass.relay.model.relay.OASchema">
+    <constructor>
+      <arg column="tablename" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="columnindex" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="columnname" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="isid" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="iskey" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="columntype" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="columnbyte" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="columnlength" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="decimallength" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="cannull" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="defaultvalue" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="comment" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    tablename, columnindex, columnname, isid, iskey, columntype, columnbyte, columnlength, 
+    decimallength, cannull, defaultvalue, comment
+  </sql>
+  <select id="selectByExample" parameterType="com.sundeinfo.sypglass.relay.model.relay.OASchemaExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from m_oaschema
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.sundeinfo.sypglass.relay.model.relay.OASchemaExample">
+    delete from m_oaschema
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sundeinfo.sypglass.relay.model.relay.OASchema">
+    insert into m_oaschema (tablename, columnindex, columnname, 
+      isid, iskey, columntype, 
+      columnbyte, columnlength, decimallength, 
+      cannull, defaultvalue, comment
+      )
+    values (#{tablename,jdbcType=VARCHAR}, #{columnindex,jdbcType=INTEGER}, #{columnname,jdbcType=VARCHAR}, 
+      #{isid,jdbcType=VARCHAR}, #{iskey,jdbcType=VARCHAR}, #{columntype,jdbcType=VARCHAR}, 
+      #{columnbyte,jdbcType=INTEGER}, #{columnlength,jdbcType=INTEGER}, #{decimallength,jdbcType=INTEGER}, 
+      #{cannull,jdbcType=VARCHAR}, #{defaultvalue,jdbcType=VARCHAR}, #{comment,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sundeinfo.sypglass.relay.model.relay.OASchema">
+    insert into m_oaschema
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tablename != null">
+        tablename,
+      </if>
+      <if test="columnindex != null">
+        columnindex,
+      </if>
+      <if test="columnname != null">
+        columnname,
+      </if>
+      <if test="isid != null">
+        isid,
+      </if>
+      <if test="iskey != null">
+        iskey,
+      </if>
+      <if test="columntype != null">
+        columntype,
+      </if>
+      <if test="columnbyte != null">
+        columnbyte,
+      </if>
+      <if test="columnlength != null">
+        columnlength,
+      </if>
+      <if test="decimallength != null">
+        decimallength,
+      </if>
+      <if test="cannull != null">
+        cannull,
+      </if>
+      <if test="defaultvalue != null">
+        defaultvalue,
+      </if>
+      <if test="comment != null">
+        comment,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tablename != null">
+        #{tablename,jdbcType=VARCHAR},
+      </if>
+      <if test="columnindex != null">
+        #{columnindex,jdbcType=INTEGER},
+      </if>
+      <if test="columnname != null">
+        #{columnname,jdbcType=VARCHAR},
+      </if>
+      <if test="isid != null">
+        #{isid,jdbcType=VARCHAR},
+      </if>
+      <if test="iskey != null">
+        #{iskey,jdbcType=VARCHAR},
+      </if>
+      <if test="columntype != null">
+        #{columntype,jdbcType=VARCHAR},
+      </if>
+      <if test="columnbyte != null">
+        #{columnbyte,jdbcType=INTEGER},
+      </if>
+      <if test="columnlength != null">
+        #{columnlength,jdbcType=INTEGER},
+      </if>
+      <if test="decimallength != null">
+        #{decimallength,jdbcType=INTEGER},
+      </if>
+      <if test="cannull != null">
+        #{cannull,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultvalue != null">
+        #{defaultvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="comment != null">
+        #{comment,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sundeinfo.sypglass.relay.model.relay.OASchemaExample" resultType="java.lang.Long">
+    select count(*) from m_oaschema
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update m_oaschema
+    <set>
+      <if test="record.tablename != null">
+        tablename = #{record.tablename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.columnindex != null">
+        columnindex = #{record.columnindex,jdbcType=INTEGER},
+      </if>
+      <if test="record.columnname != null">
+        columnname = #{record.columnname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isid != null">
+        isid = #{record.isid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.iskey != null">
+        iskey = #{record.iskey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.columntype != null">
+        columntype = #{record.columntype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.columnbyte != null">
+        columnbyte = #{record.columnbyte,jdbcType=INTEGER},
+      </if>
+      <if test="record.columnlength != null">
+        columnlength = #{record.columnlength,jdbcType=INTEGER},
+      </if>
+      <if test="record.decimallength != null">
+        decimallength = #{record.decimallength,jdbcType=INTEGER},
+      </if>
+      <if test="record.cannull != null">
+        cannull = #{record.cannull,jdbcType=VARCHAR},
+      </if>
+      <if test="record.defaultvalue != null">
+        defaultvalue = #{record.defaultvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.comment != null">
+        comment = #{record.comment,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update m_oaschema
+    set tablename = #{record.tablename,jdbcType=VARCHAR},
+      columnindex = #{record.columnindex,jdbcType=INTEGER},
+      columnname = #{record.columnname,jdbcType=VARCHAR},
+      isid = #{record.isid,jdbcType=VARCHAR},
+      iskey = #{record.iskey,jdbcType=VARCHAR},
+      columntype = #{record.columntype,jdbcType=VARCHAR},
+      columnbyte = #{record.columnbyte,jdbcType=INTEGER},
+      columnlength = #{record.columnlength,jdbcType=INTEGER},
+      decimallength = #{record.decimallength,jdbcType=INTEGER},
+      cannull = #{record.cannull,jdbcType=VARCHAR},
+      defaultvalue = #{record.defaultvalue,jdbcType=VARCHAR},
+      comment = #{record.comment,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

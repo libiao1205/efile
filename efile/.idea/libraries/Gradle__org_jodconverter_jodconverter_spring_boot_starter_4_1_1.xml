@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.jodconverter:jodconverter-spring-boot-starter:4.1.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jodconverter/jodconverter-spring-boot-starter/4.1.1/41ed329a7ba1f2eab451f9a6a2be2d7279db9f86/jodconverter-spring-boot-starter-4.1.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jodconverter/jodconverter-spring-boot-starter/4.1.1/10f41be98f2d7c192ee0b52a57e960749e205d17/jodconverter-spring-boot-starter-4.1.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

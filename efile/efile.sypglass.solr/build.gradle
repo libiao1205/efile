@@ -1,0 +1,54 @@
+
+apply plugin: 'org.springframework.boot'
+
+dependencies {
+
+    compile(
+            project(':sundeinfo.core'),
+            project(':sundeinfo.file'),
+            project(':sundeinfo.security')
+    )
+
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-solr
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-solr', version: '1.5.8.RELEASE'
+
+    /** MySql数据库配置 */
+    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.11'
+
+    /** SqlServer配置 */
+    compile group: 'com.microsoft.sqlserver', name: 'mssql-jdbc', version: '7.0.0.jre8'
+//    // vpn环境下用微软的包会有链接问题，这里用sourceforge的第三方jdbc包
+//    compile group: 'net.sourceforge.jtds', name: 'jtds', version: '1.2.7'
+
+    /** mybatis配置 */
+    compile group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: '1.3.2'
+    compile group: 'org.mybatis.generator', name: 'mybatis-generator-core', version: '1.3.7'
+    compile group: 'org.mybatis.generator', name: 'mybatis-generator-maven-plugin', version: '1.3.7'
+
+    /** MongoDB配置 */
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-mongodb', version: '1.5.8.RELEASE'
+
+
+}
+
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "gradle.plugin.com.arenagod.gradle:mybatis-generator-plugin:1.4"
+    }
+}
+
+apply plugin: "com.arenagod.gradle.MybatisGenerator"
+
+configurations {
+    mybatisGenerator
+}
+
+mybatisGenerator {
+    verbose = true
+    configFile = 'src/main/resources/tools/generatorConfig.xml'
+}

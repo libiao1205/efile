@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sundeinfo.sypglass.solr.mapper.SolrHolderMapper">
+  <resultMap id="BaseResultMap" type="com.sundeinfo.sypglass.solr.model.SolrHolder">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="fileid" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="saveid" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="lastupdatedate" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="handle" javaType="java.lang.Byte" jdbcType="TINYINT" />
+      <arg column="path" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, fileid, name, saveid, lastupdatedate, handle, path
+  </sql>
+  <select id="selectByExample" parameterType="com.sundeinfo.sypglass.solr.model.SolrHolderExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from r_solrholder
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from r_solrholder
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from r_solrholder
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sundeinfo.sypglass.solr.model.SolrHolderExample">
+    delete from r_solrholder
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sundeinfo.sypglass.solr.model.SolrHolder">
+    insert into r_solrholder (id, fileid, name, 
+      saveid, lastupdatedate, handle, 
+      path)
+    values (#{id,jdbcType=BIGINT}, #{fileid,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
+      #{saveid,jdbcType=VARCHAR}, #{lastupdatedate,jdbcType=TIMESTAMP}, #{handle,jdbcType=TINYINT}, 
+      #{path,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sundeinfo.sypglass.solr.model.SolrHolder">
+    insert into r_solrholder
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="fileid != null">
+        fileid,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="saveid != null">
+        saveid,
+      </if>
+      <if test="lastupdatedate != null">
+        lastupdatedate,
+      </if>
+      <if test="handle != null">
+        handle,
+      </if>
+      <if test="path != null">
+        path,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="fileid != null">
+        #{fileid,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="saveid != null">
+        #{saveid,jdbcType=VARCHAR},
+      </if>
+      <if test="lastupdatedate != null">
+        #{lastupdatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="handle != null">
+        #{handle,jdbcType=TINYINT},
+      </if>
+      <if test="path != null">
+        #{path,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sundeinfo.sypglass.solr.model.SolrHolderExample" resultType="java.lang.Long">
+    select count(*) from r_solrholder
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update r_solrholder
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.fileid != null">
+        fileid = #{record.fileid,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saveid != null">
+        saveid = #{record.saveid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastupdatedate != null">
+        lastupdatedate = #{record.lastupdatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.handle != null">
+        handle = #{record.handle,jdbcType=TINYINT},
+      </if>
+      <if test="record.path != null">
+        path = #{record.path,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update r_solrholder
+    set id = #{record.id,jdbcType=BIGINT},
+      fileid = #{record.fileid,jdbcType=BIGINT},
+      name = #{record.name,jdbcType=VARCHAR},
+      saveid = #{record.saveid,jdbcType=VARCHAR},
+      lastupdatedate = #{record.lastupdatedate,jdbcType=TIMESTAMP},
+      handle = #{record.handle,jdbcType=TINYINT},
+      path = #{record.path,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sundeinfo.sypglass.solr.model.SolrHolder">
+    update r_solrholder
+    <set>
+      <if test="fileid != null">
+        fileid = #{fileid,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="saveid != null">
+        saveid = #{saveid,jdbcType=VARCHAR},
+      </if>
+      <if test="lastupdatedate != null">
+        lastupdatedate = #{lastupdatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="handle != null">
+        handle = #{handle,jdbcType=TINYINT},
+      </if>
+      <if test="path != null">
+        path = #{path,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sundeinfo.sypglass.solr.model.SolrHolder">
+    update r_solrholder
+    set fileid = #{fileid,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      saveid = #{saveid,jdbcType=VARCHAR},
+      lastupdatedate = #{lastupdatedate,jdbcType=TIMESTAMP},
+      handle = #{handle,jdbcType=TINYINT},
+      path = #{path,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

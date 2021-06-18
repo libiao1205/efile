@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sundeinfo.sypglass.mapper.BlockedFolderMapper">
+  <resultMap id="BaseResultMap" type="com.sundeinfo.sypglass.model.BlockedFolder">
+    <constructor>
+      <idArg column="sequence" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="parentId" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="status" javaType="java.lang.Byte" jdbcType="TINYINT" />
+      <arg column="createuserid" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="createusername" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="createdate" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="isdelete" javaType="java.lang.Byte" jdbcType="TINYINT" />
+      <arg column="deleteuserid" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="deleteusername" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="deletedate" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="parentpath" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="parentpathname" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    sequence, id, parentId, name, status, createuserid, createusername, createdate, isdelete, 
+    deleteuserid, deleteusername, deletedate, parentpath, parentpathname
+  </sql>
+  <select id="selectByExample" parameterType="com.sundeinfo.sypglass.model.BlockedFolderExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from b_blockedfolder
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from b_blockedfolder
+    where sequence = #{sequence,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from b_blockedfolder
+    where sequence = #{sequence,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sundeinfo.sypglass.model.BlockedFolderExample">
+    delete from b_blockedfolder
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sundeinfo.sypglass.model.BlockedFolder">
+    insert into b_blockedfolder (sequence, id, parentId, 
+      name, status, createuserid, 
+      createusername, createdate, isdelete, 
+      deleteuserid, deleteusername, deletedate, 
+      parentpath, parentpathname)
+    values (#{sequence,jdbcType=BIGINT}, #{id,jdbcType=BIGINT}, #{parentid,jdbcType=BIGINT}, 
+      #{name,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, #{createuserid,jdbcType=BIGINT}, 
+      #{createusername,jdbcType=VARCHAR}, #{createdate,jdbcType=TIMESTAMP}, #{isdelete,jdbcType=TINYINT}, 
+      #{deleteuserid,jdbcType=BIGINT}, #{deleteusername,jdbcType=VARCHAR}, #{deletedate,jdbcType=TIMESTAMP}, 
+      #{parentpath,jdbcType=VARCHAR}, #{parentpathname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sundeinfo.sypglass.model.BlockedFolder">
+    insert into b_blockedfolder
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sequence != null">
+        sequence,
+      </if>
+      <if test="id != null">
+        id,
+      </if>
+      <if test="parentid != null">
+        parentId,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createuserid != null">
+        createuserid,
+      </if>
+      <if test="createusername != null">
+        createusername,
+      </if>
+      <if test="createdate != null">
+        createdate,
+      </if>
+      <if test="isdelete != null">
+        isdelete,
+      </if>
+      <if test="deleteuserid != null">
+        deleteuserid,
+      </if>
+      <if test="deleteusername != null">
+        deleteusername,
+      </if>
+      <if test="deletedate != null">
+        deletedate,
+      </if>
+      <if test="parentpath != null">
+        parentpath,
+      </if>
+      <if test="parentpathname != null">
+        parentpathname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sequence != null">
+        #{sequence,jdbcType=BIGINT},
+      </if>
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="parentid != null">
+        #{parentid,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createuserid != null">
+        #{createuserid,jdbcType=BIGINT},
+      </if>
+      <if test="createusername != null">
+        #{createusername,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdelete != null">
+        #{isdelete,jdbcType=TINYINT},
+      </if>
+      <if test="deleteuserid != null">
+        #{deleteuserid,jdbcType=BIGINT},
+      </if>
+      <if test="deleteusername != null">
+        #{deleteusername,jdbcType=VARCHAR},
+      </if>
+      <if test="deletedate != null">
+        #{deletedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="parentpath != null">
+        #{parentpath,jdbcType=VARCHAR},
+      </if>
+      <if test="parentpathname != null">
+        #{parentpathname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sundeinfo.sypglass.model.BlockedFolderExample" resultType="java.lang.Long">
+    select count(*) from b_blockedfolder
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update b_blockedfolder
+    <set>
+      <if test="record.sequence != null">
+        sequence = #{record.sequence,jdbcType=BIGINT},
+      </if>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.parentid != null">
+        parentId = #{record.parentid,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.createuserid != null">
+        createuserid = #{record.createuserid,jdbcType=BIGINT},
+      </if>
+      <if test="record.createusername != null">
+        createusername = #{record.createusername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdate != null">
+        createdate = #{record.createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isdelete != null">
+        isdelete = #{record.isdelete,jdbcType=TINYINT},
+      </if>
+      <if test="record.deleteuserid != null">
+        deleteuserid = #{record.deleteuserid,jdbcType=BIGINT},
+      </if>
+      <if test="record.deleteusername != null">
+        deleteusername = #{record.deleteusername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deletedate != null">
+        deletedate = #{record.deletedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.parentpath != null">
+        parentpath = #{record.parentpath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentpathname != null">
+        parentpathname = #{record.parentpathname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update b_blockedfolder
+    set sequence = #{record.sequence,jdbcType=BIGINT},
+      id = #{record.id,jdbcType=BIGINT},
+      parentId = #{record.parentid,jdbcType=BIGINT},
+      name = #{record.name,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=TINYINT},
+      createuserid = #{record.createuserid,jdbcType=BIGINT},
+      createusername = #{record.createusername,jdbcType=VARCHAR},
+      createdate = #{record.createdate,jdbcType=TIMESTAMP},
+      isdelete = #{record.isdelete,jdbcType=TINYINT},
+      deleteuserid = #{record.deleteuserid,jdbcType=BIGINT},
+      deleteusername = #{record.deleteusername,jdbcType=VARCHAR},
+      deletedate = #{record.deletedate,jdbcType=TIMESTAMP},
+      parentpath = #{record.parentpath,jdbcType=VARCHAR},
+      parentpathname = #{record.parentpathname,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sundeinfo.sypglass.model.BlockedFolder">
+    update b_blockedfolder
+    <set>
+      <if test="id != null">
+        id = #{id,jdbcType=BIGINT},
+      </if>
+      <if test="parentid != null">
+        parentId = #{parentid,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createuserid != null">
+        createuserid = #{createuserid,jdbcType=BIGINT},
+      </if>
+      <if test="createusername != null">
+        createusername = #{createusername,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        createdate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdelete != null">
+        isdelete = #{isdelete,jdbcType=TINYINT},
+      </if>
+      <if test="deleteuserid != null">
+        deleteuserid = #{deleteuserid,jdbcType=BIGINT},
+      </if>
+      <if test="deleteusername != null">
+        deleteusername = #{deleteusername,jdbcType=VARCHAR},
+      </if>
+      <if test="deletedate != null">
+        deletedate = #{deletedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="parentpath != null">
+        parentpath = #{parentpath,jdbcType=VARCHAR},
+      </if>
+      <if test="parentpathname != null">
+        parentpathname = #{parentpathname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sequence = #{sequence,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sundeinfo.sypglass.model.BlockedFolder">
+    update b_blockedfolder
+    set id = #{id,jdbcType=BIGINT},
+      parentId = #{parentid,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      createuserid = #{createuserid,jdbcType=BIGINT},
+      createusername = #{createusername,jdbcType=VARCHAR},
+      createdate = #{createdate,jdbcType=TIMESTAMP},
+      isdelete = #{isdelete,jdbcType=TINYINT},
+      deleteuserid = #{deleteuserid,jdbcType=BIGINT},
+      deleteusername = #{deleteusername,jdbcType=VARCHAR},
+      deletedate = #{deletedate,jdbcType=TIMESTAMP},
+      parentpath = #{parentpath,jdbcType=VARCHAR},
+      parentpathname = #{parentpathname,jdbcType=VARCHAR}
+    where sequence = #{sequence,jdbcType=BIGINT}
+  </update>
+</mapper>

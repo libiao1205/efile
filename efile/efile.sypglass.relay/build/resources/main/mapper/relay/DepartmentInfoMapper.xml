@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sundeinfo.sypglass.relay.mapper.relay.DepartmentInfoMapper">
+  <resultMap id="BaseResultMap" type="com.sundeinfo.sypglass.relay.model.relay.DepartmentInfo">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="oaid" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="oakind" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="mark" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="companyid" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="parentid" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="canceled" javaType="java.lang.Byte" jdbcType="TINYINT" />
+      <arg column="code" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="synchrodate" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, oaid, oakind, name, mark, companyid, parentid, canceled, code, synchrodate
+  </sql>
+  <select id="selectByExample" parameterType="com.sundeinfo.sypglass.relay.model.relay.DepartmentInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from o_departmentinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from o_departmentinfo
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from o_departmentinfo
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sundeinfo.sypglass.relay.model.relay.DepartmentInfoExample">
+    delete from o_departmentinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sundeinfo.sypglass.relay.model.relay.DepartmentInfo">
+    insert into o_departmentinfo (id, oaid, oakind, 
+      name, mark, companyid, 
+      parentid, canceled, code, 
+      synchrodate)
+    values (#{id,jdbcType=BIGINT}, #{oaid,jdbcType=INTEGER}, #{oakind,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{mark,jdbcType=VARCHAR}, #{companyid,jdbcType=INTEGER}, 
+      #{parentid,jdbcType=INTEGER}, #{canceled,jdbcType=TINYINT}, #{code,jdbcType=VARCHAR}, 
+      #{synchrodate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sundeinfo.sypglass.relay.model.relay.DepartmentInfo">
+    insert into o_departmentinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="oaid != null">
+        oaid,
+      </if>
+      <if test="oakind != null">
+        oakind,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="mark != null">
+        mark,
+      </if>
+      <if test="companyid != null">
+        companyid,
+      </if>
+      <if test="parentid != null">
+        parentid,
+      </if>
+      <if test="canceled != null">
+        canceled,
+      </if>
+      <if test="code != null">
+        code,
+      </if>
+      <if test="synchrodate != null">
+        synchrodate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="oaid != null">
+        #{oaid,jdbcType=INTEGER},
+      </if>
+      <if test="oakind != null">
+        #{oakind,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="mark != null">
+        #{mark,jdbcType=VARCHAR},
+      </if>
+      <if test="companyid != null">
+        #{companyid,jdbcType=INTEGER},
+      </if>
+      <if test="parentid != null">
+        #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="canceled != null">
+        #{canceled,jdbcType=TINYINT},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="synchrodate != null">
+        #{synchrodate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sundeinfo.sypglass.relay.model.relay.DepartmentInfoExample" resultType="java.lang.Long">
+    select count(*) from o_departmentinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update o_departmentinfo
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.oaid != null">
+        oaid = #{record.oaid,jdbcType=INTEGER},
+      </if>
+      <if test="record.oakind != null">
+        oakind = #{record.oakind,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mark != null">
+        mark = #{record.mark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyid != null">
+        companyid = #{record.companyid,jdbcType=INTEGER},
+      </if>
+      <if test="record.parentid != null">
+        parentid = #{record.parentid,jdbcType=INTEGER},
+      </if>
+      <if test="record.canceled != null">
+        canceled = #{record.canceled,jdbcType=TINYINT},
+      </if>
+      <if test="record.code != null">
+        code = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.synchrodate != null">
+        synchrodate = #{record.synchrodate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update o_departmentinfo
+    set id = #{record.id,jdbcType=BIGINT},
+      oaid = #{record.oaid,jdbcType=INTEGER},
+      oakind = #{record.oakind,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      mark = #{record.mark,jdbcType=VARCHAR},
+      companyid = #{record.companyid,jdbcType=INTEGER},
+      parentid = #{record.parentid,jdbcType=INTEGER},
+      canceled = #{record.canceled,jdbcType=TINYINT},
+      code = #{record.code,jdbcType=VARCHAR},
+      synchrodate = #{record.synchrodate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sundeinfo.sypglass.relay.model.relay.DepartmentInfo">
+    update o_departmentinfo
+    <set>
+      <if test="oaid != null">
+        oaid = #{oaid,jdbcType=INTEGER},
+      </if>
+      <if test="oakind != null">
+        oakind = #{oakind,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="mark != null">
+        mark = #{mark,jdbcType=VARCHAR},
+      </if>
+      <if test="companyid != null">
+        companyid = #{companyid,jdbcType=INTEGER},
+      </if>
+      <if test="parentid != null">
+        parentid = #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="canceled != null">
+        canceled = #{canceled,jdbcType=TINYINT},
+      </if>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="synchrodate != null">
+        synchrodate = #{synchrodate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sundeinfo.sypglass.relay.model.relay.DepartmentInfo">
+    update o_departmentinfo
+    set oaid = #{oaid,jdbcType=INTEGER},
+      oakind = #{oakind,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      mark = #{mark,jdbcType=VARCHAR},
+      companyid = #{companyid,jdbcType=INTEGER},
+      parentid = #{parentid,jdbcType=INTEGER},
+      canceled = #{canceled,jdbcType=TINYINT},
+      code = #{code,jdbcType=VARCHAR},
+      synchrodate = #{synchrodate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

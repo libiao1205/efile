@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Gradle : efile : sundeinfo.core.war">
+    <output-path>$PROJECT_DIR$/sundeinfo.core/build/libs</output-path>
+    <properties id="gradle-properties">
+      <options external-project-path="$PROJECT_DIR$" />
+    </properties>
+    <root id="archive" name="sundeinfo.core.war">
+      <element id="artifact" artifact-name="Gradle : efile : sundeinfo.core.war (exploded)" />
+    </root>
+  </artifact>
+</component>

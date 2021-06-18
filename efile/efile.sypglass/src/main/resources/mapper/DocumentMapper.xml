@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sundeinfo.sypglass.mapper.DocumentMapper">
+
+    <resultMap id="DocumentResultMap" type="com.sundeinfo.sypglass.model.Document">
+        <constructor>
+            <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
+            <arg column="parentid" javaType="java.lang.Long" jdbcType="BIGINT" />
+            <arg column="sortno" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="kind" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="doctype" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="status" javaType="java.lang.Byte" jdbcType="TINYINT" />
+            <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="suffix" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="size" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="createuserid" javaType="java.lang.Long" jdbcType="BIGINT" />
+            <arg column="createusername" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="createdate" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <arg column="lastupdateuserid" javaType="java.lang.Long" jdbcType="BIGINT" />
+            <arg column="lastupdateusername" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="lastupdatedate" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <arg column="isdelete" javaType="java.lang.Byte" jdbcType="TINYINT" />
+            <arg column="deleteuserid" javaType="java.lang.Long" jdbcType="BIGINT" />
+            <arg column="deleteusername" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="deletedate" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <arg column="parentPath" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="parentPathName" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="fullpath" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="fullname" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="comment" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="searchData" javaType="java.lang.String" jdbcType="VARCHAR" />
+        </constructor>
+    </resultMap>
+
+    <resultMap id="Document2ResultMap" type="com.sundeinfo.sypglass.model.Document">
+        <constructor>
+            <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
+            <arg column="parentid" javaType="java.lang.Long" jdbcType="BIGINT" />
+            <arg column="sortno" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="kind" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="doctype" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="status" javaType="java.lang.Byte" jdbcType="TINYINT" />
+            <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="suffix" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="size" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="createuserid" javaType="java.lang.Long" jdbcType="BIGINT" />
+            <arg column="createusername" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="createdate" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <arg column="lastupdateuserid" javaType="java.lang.Long" jdbcType="BIGINT" />
+            <arg column="lastupdateusername" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="lastupdatedate" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <arg column="isdelete" javaType="java.lang.Byte" jdbcType="TINYINT" />
+            <arg column="deleteuserid" javaType="java.lang.Long" jdbcType="BIGINT" />
+            <arg column="deleteusername" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="deletedate" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <arg column="parentPath" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="parentPathName" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="fullpath" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="fullname" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="comment" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="searchData" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="disabled" javaType="java.lang.Boolean" jdbcType="BIT" />
+            <arg column="rankAuthor" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="rankSource" javaType="java.lang.String" jdbcType="VARCHAR" />
+        </constructor>
+    </resultMap>
+
+    <resultMap id="FolderResultMap" type="com.sundeinfo.sypglass.model.Folder">
+        <constructor>
+            <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
+            <arg column="parentid" javaType="java.lang.Long" jdbcType="BIGINT" />
+            <arg column="sortno" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="status" javaType="java.lang.Byte" jdbcType="TINYINT" />
+            <arg column="isdelete" javaType="java.lang.Byte" jdbcType="TINYINT" />
+            <arg column="parentPath" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="parentPathName" javaType="java.lang.String" jdbcType="VARCHAR" />
+        </constructor>
+    </resultMap>
+
+    <select id="selectDocumentLikeKey" resultMap="DocumentResultMap" >
+      SELECT * FROM v_document WHERE status != 9 AND kind = 'file'
+      AND (name LIKE CONCAT('%',#{key,jdbcType=VARCHAR},'%') OR comment LIKE CONCAT('%',#{key,jdbcType=VARCHAR},'%'))
+      ORDER BY createdate DESC
+    </select>
+
+    <select id="selectDocumentLikeKeyWithJieba" resultMap="DocumentResultMap" >
+      SELECT * FROM v_document WHERE status != 9 AND kind = 'file'
+        AND
+        (
+          <foreach collection="words" item="word" open="(" close=") " separator=" AND ">
+            searchdata LIKE CONCAT('%',#{word,jdbcType=VARCHAR},'%')
+          </foreach>
+        )
+      ORDER BY createdate DESC LIMIT #{pagenum,jdbcType=INTEGER} ,#{pagesize,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectTrashDocument" resultMap="DocumentResultMap" >
+      SELECT * FROM v_document WHERE status = 9 ORDER BY kind DESC ,deletedate DESC
+    </select>
+
+    <select id="selectTrashDocumentBySearchKey" resultMap="DocumentResultMap" >
+      SELECT * FROM v_document WHERE status = 9 AND name LIKE CONCAT('%',#{word,jdbcType=VARCHAR},'%') ORDER BY kind DESC ,deletedate DESC
+    </select>
+
+    <select id="selectTrashDocumentByUserId" resultMap="DocumentResultMap" >
+      SELECT * FROM v_document WHERE deleteuserid = #{userId,jdbcType=BIGINT} AND status = 9 ORDER BY kind DESC ,deletedate DESC
+    </select>
+
+    <select id="selectTrashDocumentByUserIdAndSearchKey" resultMap="DocumentResultMap" >
+      SELECT * FROM v_document WHERE deleteuserid = #{userId,jdbcType=BIGINT} AND status = 9 AND name LIKE CONCAT('%',#{word,jdbcType=VARCHAR},'%') ORDER BY kind DESC ,deletedate DESC
+    </select>
+
+    <select id="selectTrashDocumentByFolderName" resultMap="DocumentResultMap" >
+        SELECT * FROM v_document WHERE status = 9
+        AND (deleteuserid = #{userId,jdbcType=BIGINT}
+        OR
+        (
+        <foreach collection="folders" item="folder" open="(" close=") " separator=" OR ">
+            parentpathname LIKE CONCAT('%',#{folder,jdbcType=VARCHAR},'%')
+        </foreach>
+        ))
+        ORDER BY kind DESC ,deletedate DESC
+    </select>
+
+    <select id="selectTrashDocumentByFolderNameAndSearchKey" resultMap="DocumentResultMap" >
+        SELECT * FROM v_document WHERE status = 9 AND name LIKE CONCAT('%',#{word,jdbcType=VARCHAR},'%')
+        AND (deleteuserid = #{userId,jdbcType=BIGINT}
+        OR
+        (
+        <foreach collection="folders" item="folder" open="(" close=") " separator=" OR ">
+            parentpathname LIKE CONCAT('%',#{folder,jdbcType=VARCHAR},'%')
+        </foreach>
+        ))
+        ORDER BY kind DESC ,deletedate DESC
+    </select>
+
+    <select id="selectDeletedDocument" resultMap="DocumentResultMap" >
+      SELECT * FROM v_deleteddocument ORDER BY deletedate DESC
+    </select>
+
+    <select id="selectDeletedDocumentLikeKeyWithJieba" resultMap="DocumentResultMap" >
+        SELECT * FROM v_deleteddocument WHERE 1=1
+        AND
+        (
+        <foreach collection="words" item="word" open="(" close=") " separator=" AND ">
+            searchdata LIKE CONCAT('%',#{word,jdbcType=VARCHAR},'%')
+        </foreach>
+        )
+        ORDER BY deletedate DESC
+    </select>
+
+    <select id="selectDocumentByid" resultMap="DocumentResultMap" >
+      SELECT * FROM v_document WHERE id = #{id,jdbcType=BIGINT} AND kind = #{kind,jdbcType=VARCHAR} AND status != 9
+    </select>
+
+    <select id="selectDocumentByParentid" resultMap="DocumentResultMap" >
+      SELECT *
+      FROM v_document
+      WHERE parentid = #{id,jdbcType=BIGINT} AND v_document.status != 9
+      ORDER BY kind DESC ,id ASC
+    </select>
+
+    <select id="selectFolderAndChildrenById" resultMap="FolderResultMap" >
+      SELECT * FROM u_folder WHERE FIND_IN_SET(id,queryFolderAndChildren(#{id})) AND status != 9 order by parentid,id;
+    </select>
+
+    <select id="selectFolderFromRoot" resultMap="FolderResultMap" >
+      SELECT * FROM u_folder WHERE status != 9 order by parentid,id;
+    </select>
+
+    <select id="selectFolderAndParentsById" resultMap="FolderResultMap" >
+      SELECT * FROM u_folder WHERE FIND_IN_SET(id,queryFolderAndParents(#{id})) AND status != 9 order by parentid,id;
+    </select>
+
+    <select id="selectFolderAndChildrenByIdWithDelete" resultMap="FolderResultMap" >
+      SELECT * FROM u_folder WHERE FIND_IN_SET(id,queryFolderAndChildren(#{id})) order by parentid,id;
+    </select>
+
+    <!--<select id="selectDocumentByParentidAndUserid" resultMap="Document2ResultMap" >-->
+      <!--SELECT u_userfolderdisabled.disabled,v_document.*-->
+      <!--FROM v_document LEFT JOIN u_userfolderdisabled-->
+				<!--ON v_document.kind = 'folder'-->
+			 <!--AND v_document.id = u_userfolderdisabled.folderid-->
+			 <!--AND u_userfolderdisabled.userid = #{userid,jdbcType=BIGINT}-->
+      <!--WHERE v_document.parentid = #{id,jdbcType=BIGINT} AND v_document.status != 9-->
+      <!--ORDER BY v_document.kind DESC ,v_document.name ASC,v_document.id ASC-->
+    <!--</select>-->
+
+    <select id="selectDocumentByParentidAndUserid" resultMap="Document2ResultMap" >
+      SELECT * FROM
+        (
+          SELECT
+            u_userfolderdisabled.disabled AS disabled,
+            u_folder.id AS id,
+            u_folder.parentId AS parentid,
+            u_folder.sortno AS sortno,
+            'folder' AS kind,
+            '99' AS doctype,
+            u_folder.status AS status,
+            u_folder.name AS name,
+            '' AS suffix,
+            '' AS size,
+            u_folder.createuserid AS createuserid,
+            u_folder.createusername AS createusername,
+            u_folder.createdate AS createdate,
+            '' AS lastupdateuserid,
+            '' AS lastupdateusername,
+            '' AS lastupdatedate,
+            u_folder.isdelete AS isdelete,
+            u_folder.deleteuserid AS deleteuserid,
+            u_folder.deleteusername AS deleteusername,
+            u_folder.deletedate AS deletedate,
+            u_folder.parentpath AS parentpath,
+            u_folder.parentpathname AS parentpathname,
+            concat( u_folder.parentpath, '/', u_folder.id ) AS fullpath,
+            concat( u_folder.parentpathname, '/', u_folder.name ) AS fullname,
+            '' AS comment,
+            '' AS rankAuthor,
+			'' AS rankSource,
+            concat_ws( '/', u_folder.createusername, u_folder.deleteusername,u_folder.parentpathname,u_folder.name ) AS searchdata
+        FROM u_folder LEFT JOIN u_userfolderdisabled ON u_userfolderdisabled.userid = #{userid,jdbcType=BIGINT}
+	     AND u_folder.id = u_userfolderdisabled.folderid
+       WHERE u_folder.isdelete = 0
+	     AND u_folder.parentid = #{id,jdbcType=BIGINT}
+	     AND u_folder.STATUS != 9
+
+	union all
+
+      SELECT '' AS disabled,
+			 u_file.id AS id,
+			 u_file.folderid AS parentid,
+			 '0' AS sortno,
+			 'file' AS kind,
+			 u_file.doctype AS doctype,
+			 u_file.status AS status,
+			 u_file.name AS name,
+			 u_file.suffix AS suffix,
+			 u_file.size AS size,
+			 u_file.createuserid AS createuserid,
+			 u_file.createusername AS createusername,
+			 u_file.createdate AS createdate,
+			 u_file.lastupdateuserid AS lastupdateuserid,
+			 u_file.lastupdateusername AS lastupdateusername,
+			 u_file.lastupdatedate AS lastupdatedate,
+			 u_file.isdelete AS isdelete,
+			 u_file.deleteuserid AS deleteuserid,
+			 u_file.deleteusername AS deleteusername,
+			 u_file.deletedate AS deletedate,
+			 u_file.parentpath AS parentpath,
+			 u_file.parentpathname AS parentpathname,
+			 concat( u_file.parentpath, '/', u_file.id ) AS fullpath,
+			 concat( u_file.parentpathname, '/', u_file.name, '.', u_file.suffix ) AS fullname,
+			 u_file.comment AS comment,
+			 u_file.rankauthor AS rankAuthor,
+			 u_file.ranksource AS rankSource,
+			 concat( '/',u_file.createusername,u_file.lastupdateusername,u_file.deleteusername, u_file.parentpathname,u_file.name,u_file.suffix,u_file.comment ) AS searchdata
+        FROM u_file
+       WHERE u_file.isdelete = 0
+         AND u_file.folderid = #{id,jdbcType=BIGINT}
+	     AND u_file.STATUS != 9
+      ) AS DOC
+      ORDER BY
+	  kind DESC,
+	  ${sortOrder},
+	  id ASC
+    </select>
+
+</mapper>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sundeinfo.sypglass.relay.mapper.oa.WorkflowRequestBaseMapper">
+  <resultMap id="workflowRequestResultMap" type="com.sundeinfo.sypglass.relay.model.oa.WorkflowRequestBase">
+    <constructor>
+      <arg column="requestid" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="workflowid" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="requestname" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="deleted" javaType="java.lang.Byte" jdbcType="TINYINT" />
+      <arg column="creater" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="createdate" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="createtime" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="lastoperator" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="lastoperatedate" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="lastoperatetime" javaType="java.lang.String" jdbcType="CHAR" />
+    </constructor>
+  </resultMap>
+
+   <select id="selectWorkflowRequestBaseByRequestIdAndWorkflowId" resultMap="workflowRequestResultMap">
+      SELECT top 100 requestbase.*
+        FROM (SELECT row_number() over(ORDER BY requestid ) as rownumber,*
+        FROM (
+              SELECT requestid,workflowid,requestname,
+                     creater,createdate,createtime,
+                     lastoperator,lastoperatedate,lastoperatetime,
+                     deleted
+              FROM  workflow_requestbase
+              WHERE requestid = #{requestid,jdbcType=INTEGER}
+                AND workflowid = #{workflowid,jdbcType=INTEGER}
+              ) AS workflow_requestbase
+              ) AS requestbase
+        WHERE rownumber > #{startindex,jdbcType=INTEGER};
+   </select>
+
+   <select id="selectWorkflowRequestBaseByWorkflowId" resultMap="workflowRequestResultMap">
+      SELECT top 100 requestbase.*
+        FROM (SELECT row_number() over(ORDER BY requestid ) as rownumber,*
+        FROM (
+              SELECT requestid,workflowid,requestname,
+                     creater,createdate,createtime,
+                     lastoperator,lastoperatedate,lastoperatetime,
+                     deleted
+              FROM  workflow_requestbase
+              WHERE workflowid = #{workflowid,jdbcType=INTEGER}
+              ) AS workflow_requestbase
+              ) AS requestbase
+        WHERE rownumber > #{startindex,jdbcType=INTEGER};
+    </select>
+
+    <select id="countWorkflowRequestBaseByWorkflowIdAndPeriod" resultType="java.lang.Integer">
+      SELECT COUNT(*) FROM  workflow_requestbase
+      WHERE workflowid = #{workflowid,jdbcType=INTEGER}
+        AND ((createdate >= #{sdate,jdbcType=CHAR} AND #{edate,jdbcType=CHAR} > createdate)
+        OR  (lastoperatedate >= #{sdate,jdbcType=CHAR} AND #{edate,jdbcType=CHAR} > lastoperatedate))
+   </select>
+
+    <select id="selectWorkflowRequestBaseByWorkflowIdAndPeriod" resultMap="workflowRequestResultMap">
+      SELECT top 100 requestbase.*
+        FROM (SELECT row_number() over(ORDER BY requestid ) as rownumber,*
+        FROM (
+              SELECT requestid,workflowid,requestname,deleted,
+		             creater,createdate,createtime,
+		             lastoperator,lastoperatedate,lastoperatetime
+		      FROM  workflow_requestbase
+		      WHERE workflowid = #{workflowid,jdbcType=INTEGER}
+                AND ((createdate >= #{sdate,jdbcType=CHAR} AND #{edate,jdbcType=CHAR} > createdate)
+                OR  (lastoperatedate >= #{sdate,jdbcType=CHAR} AND #{edate,jdbcType=CHAR} > lastoperatedate))
+              ) AS workflow_requestbase
+              ) AS requestbase
+        WHERE rownumber > #{startindex,jdbcType=INTEGER};
+   </select>
+
+</mapper>

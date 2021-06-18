@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/efile.sypglass/efile.efile.sypglass.iml" filepath="$PROJECT_DIR$/.idea/modules/efile.sypglass/efile.efile.sypglass.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/efile.sypglass/efile.efile.sypglass.main.iml" filepath="$PROJECT_DIR$/.idea/modules/efile.sypglass/efile.efile.sypglass.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/efile.sypglass.organization/efile.efile.sypglass.organization.iml" filepath="$PROJECT_DIR$/.idea/modules/efile.sypglass.organization/efile.efile.sypglass.organization.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/efile.sypglass.organization/efile.efile.sypglass.organization.main.iml" filepath="$PROJECT_DIR$/.idea/modules/efile.sypglass.organization/efile.efile.sypglass.organization.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/efile.sypglass.organization/efile.efile.sypglass.organization.test.iml" filepath="$PROJECT_DIR$/.idea/modules/efile.sypglass.organization/efile.efile.sypglass.organization.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/efile.sypglass.relay/efile.efile.sypglass.relay.iml" filepath="$PROJECT_DIR$/.idea/modules/efile.sypglass.relay/efile.efile.sypglass.relay.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/efile.sypglass.relay/efile.efile.sypglass.relay.main.iml" filepath="$PROJECT_DIR$/.idea/modules/efile.sypglass.relay/efile.efile.sypglass.relay.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/efile.sypglass.relay/efile.efile.sypglass.relay.test.iml" filepath="$PROJECT_DIR$/.idea/modules/efile.sypglass.relay/efile.efile.sypglass.relay.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/efile.sypglass.solr/efile.efile.sypglass.solr.iml" filepath="$PROJECT_DIR$/.idea/modules/efile.sypglass.solr/efile.efile.sypglass.solr.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/efile.sypglass.solr/efile.efile.sypglass.solr.main.iml" filepath="$PROJECT_DIR$/.idea/modules/efile.sypglass.solr/efile.efile.sypglass.solr.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/efile.sypglass.solr/efile.efile.sypglass.solr.test.iml" filepath="$PROJECT_DIR$/.idea/modules/efile.sypglass.solr/efile.efile.sypglass.solr.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/efile.sypglass/efile.efile.sypglass.test.iml" filepath="$PROJECT_DIR$/.idea/modules/efile.sypglass/efile.efile.sypglass.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sundeinfo.core/efile.sundeinfo.core.iml" filepath="$PROJECT_DIR$/.idea/modules/sundeinfo.core/efile.sundeinfo.core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sundeinfo.core/efile.sundeinfo.core.main.iml" filepath="$PROJECT_DIR$/.idea/modules/sundeinfo.core/efile.sundeinfo.core.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sundeinfo.core/efile.sundeinfo.core.test.iml" filepath="$PROJECT_DIR$/.idea/modules/sundeinfo.core/efile.sundeinfo.core.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sundeinfo.file/efile.sundeinfo.file.iml" filepath="$PROJECT_DIR$/.idea/modules/sundeinfo.file/efile.sundeinfo.file.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sundeinfo.file/efile.sundeinfo.file.main.iml" filepath="$PROJECT_DIR$/.idea/modules/sundeinfo.file/efile.sundeinfo.file.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sundeinfo.file/efile.sundeinfo.file.test.iml" filepath="$PROJECT_DIR$/.idea/modules/sundeinfo.file/efile.sundeinfo.file.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sundeinfo.security/efile.sundeinfo.security.iml" filepath="$PROJECT_DIR$/.idea/modules/sundeinfo.security/efile.sundeinfo.security.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sundeinfo.security/efile.sundeinfo.security.main.iml" filepath="$PROJECT_DIR$/.idea/modules/sundeinfo.security/efile.sundeinfo.security.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sundeinfo.security/efile.sundeinfo.security.test.iml" filepath="$PROJECT_DIR$/.idea/modules/sundeinfo.security/efile.sundeinfo.security.test.iml" />
+    </modules>
+  </component>
+</project>

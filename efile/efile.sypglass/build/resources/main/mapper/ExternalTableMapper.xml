@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sundeinfo.sypglass.mapper.ExternalTableMapper">
+  <resultMap id="BaseResultMap" type="com.sundeinfo.sypglass.model.ExternalTable">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="dbid" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="dbname" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="tablename" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="datacount" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="createtime" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="comment" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="synctime" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="syncuser" javaType="java.lang.Long" jdbcType="BIGINT" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, dbid, dbname, tablename, datacount, createtime, comment, synctime, syncuser
+  </sql>
+  <select id="selectByExample" parameterType="com.sundeinfo.sypglass.model.ExternalTableExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from g_externaltable
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from g_externaltable
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from g_externaltable
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sundeinfo.sypglass.model.ExternalTableExample">
+    delete from g_externaltable
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sundeinfo.sypglass.model.ExternalTable" keyProperty="id"
+          keyColumn="ID" useGeneratedKeys="true">
+    insert into g_externaltable (id, dbid, dbname, 
+      tablename, datacount, createtime, 
+      comment, synctime, syncuser
+      )
+    values (#{id,jdbcType=BIGINT}, #{dbid,jdbcType=BIGINT}, #{dbname,jdbcType=VARCHAR}, 
+      #{tablename,jdbcType=VARCHAR}, #{datacount,jdbcType=BIGINT}, #{createtime,jdbcType=VARCHAR}, 
+      #{comment,jdbcType=VARCHAR}, #{synctime,jdbcType=TIMESTAMP}, #{syncuser,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sundeinfo.sypglass.model.ExternalTable" keyProperty="id"
+          keyColumn="ID" useGeneratedKeys="true">
+    insert into g_externaltable
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="dbid != null">
+        dbid,
+      </if>
+      <if test="dbname != null">
+        dbname,
+      </if>
+      <if test="tablename != null">
+        tablename,
+      </if>
+      <if test="datacount != null">
+        datacount,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="comment != null">
+        comment,
+      </if>
+      <if test="synctime != null">
+        synctime,
+      </if>
+      <if test="syncuser != null">
+        syncuser,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="dbid != null">
+        #{dbid,jdbcType=BIGINT},
+      </if>
+      <if test="dbname != null">
+        #{dbname,jdbcType=VARCHAR},
+      </if>
+      <if test="tablename != null">
+        #{tablename,jdbcType=VARCHAR},
+      </if>
+      <if test="datacount != null">
+        #{datacount,jdbcType=BIGINT},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=VARCHAR},
+      </if>
+      <if test="comment != null">
+        #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="synctime != null">
+        #{synctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="syncuser != null">
+        #{syncuser,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sundeinfo.sypglass.model.ExternalTableExample" resultType="java.lang.Long">
+    select count(*) from g_externaltable
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update g_externaltable
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.dbid != null">
+        dbid = #{record.dbid,jdbcType=BIGINT},
+      </if>
+      <if test="record.dbname != null">
+        dbname = #{record.dbname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tablename != null">
+        tablename = #{record.tablename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.datacount != null">
+        datacount = #{record.datacount,jdbcType=BIGINT},
+      </if>
+      <if test="record.createtime != null">
+        createtime = #{record.createtime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.comment != null">
+        comment = #{record.comment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.synctime != null">
+        synctime = #{record.synctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.syncuser != null">
+        syncuser = #{record.syncuser,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update g_externaltable
+    set id = #{record.id,jdbcType=BIGINT},
+      dbid = #{record.dbid,jdbcType=BIGINT},
+      dbname = #{record.dbname,jdbcType=VARCHAR},
+      tablename = #{record.tablename,jdbcType=VARCHAR},
+      datacount = #{record.datacount,jdbcType=BIGINT},
+      createtime = #{record.createtime,jdbcType=VARCHAR},
+      comment = #{record.comment,jdbcType=VARCHAR},
+      synctime = #{record.synctime,jdbcType=TIMESTAMP},
+      syncuser = #{record.syncuser,jdbcType=BIGINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sundeinfo.sypglass.model.ExternalTable">
+    update g_externaltable
+    <set>
+      <if test="dbid != null">
+        dbid = #{dbid,jdbcType=BIGINT},
+      </if>
+      <if test="dbname != null">
+        dbname = #{dbname,jdbcType=VARCHAR},
+      </if>
+      <if test="tablename != null">
+        tablename = #{tablename,jdbcType=VARCHAR},
+      </if>
+      <if test="datacount != null">
+        datacount = #{datacount,jdbcType=BIGINT},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=VARCHAR},
+      </if>
+      <if test="comment != null">
+        comment = #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="synctime != null">
+        synctime = #{synctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="syncuser != null">
+        syncuser = #{syncuser,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sundeinfo.sypglass.model.ExternalTable">
+    update g_externaltable
+    set dbid = #{dbid,jdbcType=BIGINT},
+      dbname = #{dbname,jdbcType=VARCHAR},
+      tablename = #{tablename,jdbcType=VARCHAR},
+      datacount = #{datacount,jdbcType=BIGINT},
+      createtime = #{createtime,jdbcType=VARCHAR},
+      comment = #{comment,jdbcType=VARCHAR},
+      synctime = #{synctime,jdbcType=TIMESTAMP},
+      syncuser = #{syncuser,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

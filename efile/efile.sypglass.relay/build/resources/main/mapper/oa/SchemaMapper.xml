@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sundeinfo.sypglass.relay.mapper.oa.SchemaMapper">
+
+	<resultMap id="SchemaResultMap" type="com.sundeinfo.sypglass.relay.model.relay.OASchema">
+		<constructor>
+			<arg column="tablename" javaType="java.lang.String" jdbcType="VARCHAR" />
+			<arg column="columnindex" javaType="java.lang.Integer" jdbcType="INTEGER" />
+			<arg column="columnname" javaType="java.lang.String" jdbcType="VARCHAR" />
+			<arg column="isid" javaType="java.lang.String" jdbcType="VARCHAR" />
+			<arg column="iskey" javaType="java.lang.String" jdbcType="VARCHAR" />
+			<arg column="columntype" javaType="java.lang.String" jdbcType="VARCHAR" />
+			<arg column="columnbyte" javaType="java.lang.Integer" jdbcType="INTEGER" />
+			<arg column="columnlength" javaType="java.lang.Integer" jdbcType="INTEGER" />
+			<arg column="decimallength" javaType="java.lang.Integer" jdbcType="INTEGER" />
+			<arg column="cannull" javaType="java.lang.String" jdbcType="VARCHAR" />
+			<arg column="defaultvalue" javaType="java.lang.String" jdbcType="VARCHAR" />
+			<arg column="comment" javaType="java.lang.String" jdbcType="VARCHAR" />
+		</constructor>
+	</resultMap>
+
+    <select id="selectAll" resultMap="SchemaResultMap">
+		SELECT (case when a.colorder=1 then d.name else d.name end) tablename,
+			  a.colorder columnindex,a.name columnname,
+			  (case when COLUMNPROPERTY( a.id,a.name,'IsIdentity')=1 then 'Y'else '' end) isid,
+			(case when (SELECT count(*) FROM sysobjects
+			WHERE (name in (SELECT name FROM sysindexes
+			WHERE (id = a.id) AND (indid in
+			(SELECT indid FROM sysindexkeys
+			WHERE (id = a.id) AND (colid in
+			(SELECT colid FROM syscolumns WHERE (id = a.id) AND (name = a.name)))))))
+			AND (xtype = 'PK'))>0 then 'Y' else '' end) iskey,b.name columntype,a.length columnbyte,
+			COLUMNPROPERTY(a.id,a.name,'PRECISION') as columnlength,
+			isnull(COLUMNPROPERTY(a.id,a.name,'Scale'),0) as decimallength,(case when a.isnullable=1 then 'Y'else '' end) cannull,
+			isnull(e.text,'') defaultvalue,isnull(g.[value], ' ') AS [comment]
+		FROM  syscolumns a
+			left join systypes b on a.xtype=b.xusertype
+			inner join sysobjects d on a.id=d.id and d.xtype='U' and d.name != 'dtproperties'
+			left join syscomments e on a.cdefault=e.id
+			left join sys.extended_properties g on a.id=g.major_id AND a.colid=g.minor_id
+			left join sys.extended_properties f on d.id=f.class and f.minor_id=0
+		where b.name is not null
+		order by a.id,a.colorder
+    </select>
+
+	<select id="selectByTableName" resultMap="SchemaResultMap">
+		SELECT (case when a.colorder=1 then d.name else d.name end) tablename,
+		a.colorder columnindex,a.name columnname,
+		(case when COLUMNPROPERTY( a.id,a.name,'IsIdentity')=1 then 'Y'else '' end) isid,
+		(case when (SELECT count(*) FROM sysobjects
+		WHERE (name in (SELECT name FROM sysindexes
+		WHERE (id = a.id) AND (indid in
+		(SELECT indid FROM sysindexkeys
+		WHERE (id = a.id) AND (colid in
+		(SELECT colid FROM syscolumns WHERE (id = a.id) AND (name = a.name)))))))
+		AND (xtype = 'PK'))>0 then 'Y' else '' end) iskey,b.name columntype,a.length columnbyte,
+		COLUMNPROPERTY(a.id,a.name,'PRECISION') as columnlength,
+		isnull(COLUMNPROPERTY(a.id,a.name,'Scale'),0) as decimallength,(case when a.isnullable=1 then 'Y'else '' end) cannull,
+		isnull(e.text,'') defaultvalue,isnull(g.[value], ' ') AS [comment]
+		FROM  syscolumns a
+		left join systypes b on a.xtype=b.xusertype
+		inner join sysobjects d on a.id=d.id and d.xtype='U' and d.name != 'dtproperties'
+		left join syscomments e on a.cdefault=e.id
+		left join sys.extended_properties g on a.id=g.major_id AND a.colid=g.minor_id
+		left join sys.extended_properties f on d.id=f.class and f.minor_id=0
+		where b.name is not null
+		WHERE d.name= #{name,jdbcType=VARCHAR}
+		order by a.id,a.colorder
+	</select>
+</mapper>

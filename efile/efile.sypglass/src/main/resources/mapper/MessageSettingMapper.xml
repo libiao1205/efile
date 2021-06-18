@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sundeinfo.sypglass.mapper.MessageSettingMapper">
+  <resultMap id="BaseResultMap" type="com.sundeinfo.sypglass.model.MessageSetting">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="userid" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="updatenotice" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="deletenotice" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="downloadnotice" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="notice_1" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="notice_2" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="notice_3" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="notice_4" javaType="java.lang.Boolean" jdbcType="BIT" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, userid, updatenotice, deletenotice, downloadnotice, notice_1, notice_2, notice_3, 
+    notice_4
+  </sql>
+  <select id="selectByExample" parameterType="com.sundeinfo.sypglass.model.MessageSettingExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from u_message_setting
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from u_message_setting
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from u_message_setting
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sundeinfo.sypglass.model.MessageSettingExample">
+    delete from u_message_setting
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sundeinfo.sypglass.model.MessageSetting" keyProperty="id"
+          keyColumn="ID" useGeneratedKeys="true">
+    insert into u_message_setting (id, userid, updatenotice, 
+      deletenotice, downloadnotice, notice_1, 
+      notice_2, notice_3, notice_4)
+    values (#{id,jdbcType=BIGINT}, #{userid,jdbcType=BIGINT}, #{updatenotice,jdbcType=BIT}, 
+      #{deletenotice,jdbcType=BIT}, #{downloadnotice,jdbcType=BIT}, #{notice1,jdbcType=BIT}, 
+      #{notice2,jdbcType=BIT}, #{notice3,jdbcType=BIT}, #{notice4,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sundeinfo.sypglass.model.MessageSetting" keyProperty="id"
+          keyColumn="ID" useGeneratedKeys="true">
+    insert into u_message_setting
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="updatenotice != null">
+        updatenotice,
+      </if>
+      <if test="deletenotice != null">
+        deletenotice,
+      </if>
+      <if test="downloadnotice != null">
+        downloadnotice,
+      </if>
+      <if test="notice1 != null">
+        notice_1,
+      </if>
+      <if test="notice2 != null">
+        notice_2,
+      </if>
+      <if test="notice3 != null">
+        notice_3,
+      </if>
+      <if test="notice4 != null">
+        notice_4,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="updatenotice != null">
+        #{updatenotice,jdbcType=BIT},
+      </if>
+      <if test="deletenotice != null">
+        #{deletenotice,jdbcType=BIT},
+      </if>
+      <if test="downloadnotice != null">
+        #{downloadnotice,jdbcType=BIT},
+      </if>
+      <if test="notice1 != null">
+        #{notice1,jdbcType=BIT},
+      </if>
+      <if test="notice2 != null">
+        #{notice2,jdbcType=BIT},
+      </if>
+      <if test="notice3 != null">
+        #{notice3,jdbcType=BIT},
+      </if>
+      <if test="notice4 != null">
+        #{notice4,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sundeinfo.sypglass.model.MessageSettingExample" resultType="java.lang.Long">
+    select count(*) from u_message_setting
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update u_message_setting
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.userid != null">
+        userid = #{record.userid,jdbcType=BIGINT},
+      </if>
+      <if test="record.updatenotice != null">
+        updatenotice = #{record.updatenotice,jdbcType=BIT},
+      </if>
+      <if test="record.deletenotice != null">
+        deletenotice = #{record.deletenotice,jdbcType=BIT},
+      </if>
+      <if test="record.downloadnotice != null">
+        downloadnotice = #{record.downloadnotice,jdbcType=BIT},
+      </if>
+      <if test="record.notice1 != null">
+        notice_1 = #{record.notice1,jdbcType=BIT},
+      </if>
+      <if test="record.notice2 != null">
+        notice_2 = #{record.notice2,jdbcType=BIT},
+      </if>
+      <if test="record.notice3 != null">
+        notice_3 = #{record.notice3,jdbcType=BIT},
+      </if>
+      <if test="record.notice4 != null">
+        notice_4 = #{record.notice4,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update u_message_setting
+    set id = #{record.id,jdbcType=BIGINT},
+      userid = #{record.userid,jdbcType=BIGINT},
+      updatenotice = #{record.updatenotice,jdbcType=BIT},
+      deletenotice = #{record.deletenotice,jdbcType=BIT},
+      downloadnotice = #{record.downloadnotice,jdbcType=BIT},
+      notice_1 = #{record.notice1,jdbcType=BIT},
+      notice_2 = #{record.notice2,jdbcType=BIT},
+      notice_3 = #{record.notice3,jdbcType=BIT},
+      notice_4 = #{record.notice4,jdbcType=BIT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sundeinfo.sypglass.model.MessageSetting">
+    update u_message_setting
+    <set>
+      <if test="userid != null">
+        userid = #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="updatenotice != null">
+        updatenotice = #{updatenotice,jdbcType=BIT},
+      </if>
+      <if test="deletenotice != null">
+        deletenotice = #{deletenotice,jdbcType=BIT},
+      </if>
+      <if test="downloadnotice != null">
+        downloadnotice = #{downloadnotice,jdbcType=BIT},
+      </if>
+      <if test="notice1 != null">
+        notice_1 = #{notice1,jdbcType=BIT},
+      </if>
+      <if test="notice2 != null">
+        notice_2 = #{notice2,jdbcType=BIT},
+      </if>
+      <if test="notice3 != null">
+        notice_3 = #{notice3,jdbcType=BIT},
+      </if>
+      <if test="notice4 != null">
+        notice_4 = #{notice4,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sundeinfo.sypglass.model.MessageSetting">
+    update u_message_setting
+    set userid = #{userid,jdbcType=BIGINT},
+      updatenotice = #{updatenotice,jdbcType=BIT},
+      deletenotice = #{deletenotice,jdbcType=BIT},
+      downloadnotice = #{downloadnotice,jdbcType=BIT},
+      notice_1 = #{notice1,jdbcType=BIT},
+      notice_2 = #{notice2,jdbcType=BIT},
+      notice_3 = #{notice3,jdbcType=BIT},
+      notice_4 = #{notice4,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

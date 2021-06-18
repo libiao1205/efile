@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sundeinfo.sypglass.mapper.MessageMapper">
+  <resultMap id="BaseResultMap" type="com.sundeinfo.sypglass.model.Message">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="touser" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="todate" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="status" javaType="java.lang.Byte" jdbcType="TINYINT" />
+      <arg column="type" javaType="java.lang.Byte" jdbcType="TINYINT" />
+      <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="info" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="fromuser" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="fromusername" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="fromdate" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="resourceid" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="resourcetype" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="resourcename" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="resourcesuffix" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, touser, todate, status, type, name, info, fromuser, fromusername, fromdate, resourceid, 
+    resourcetype, resourcename, resourcesuffix
+  </sql>
+  <select id="selectByExample" parameterType="com.sundeinfo.sypglass.model.MessageExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from u_message
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from u_message
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from u_message
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sundeinfo.sypglass.model.MessageExample">
+    delete from u_message
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sundeinfo.sypglass.model.Message" keyProperty="id"
+          keyColumn="ID" useGeneratedKeys="true">
+    insert into u_message (id, touser, todate, 
+      status, type, name, 
+      info, fromuser, fromusername, 
+      fromdate, resourceid, resourcetype, 
+      resourcename, resourcesuffix)
+    values (#{id,jdbcType=BIGINT}, #{touser,jdbcType=BIGINT}, #{todate,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=TINYINT}, #{type,jdbcType=TINYINT}, #{name,jdbcType=VARCHAR}, 
+      #{info,jdbcType=VARCHAR}, #{fromuser,jdbcType=BIGINT}, #{fromusername,jdbcType=VARCHAR}, 
+      #{fromdate,jdbcType=TIMESTAMP}, #{resourceid,jdbcType=BIGINT}, #{resourcetype,jdbcType=VARCHAR}, 
+      #{resourcename,jdbcType=VARCHAR}, #{resourcesuffix,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sundeinfo.sypglass.model.Message" keyProperty="id"
+          keyColumn="ID" useGeneratedKeys="true">
+    insert into u_message
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="touser != null">
+        touser,
+      </if>
+      <if test="todate != null">
+        todate,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="info != null">
+        info,
+      </if>
+      <if test="fromuser != null">
+        fromuser,
+      </if>
+      <if test="fromusername != null">
+        fromusername,
+      </if>
+      <if test="fromdate != null">
+        fromdate,
+      </if>
+      <if test="resourceid != null">
+        resourceid,
+      </if>
+      <if test="resourcetype != null">
+        resourcetype,
+      </if>
+      <if test="resourcename != null">
+        resourcename,
+      </if>
+      <if test="resourcesuffix != null">
+        resourcesuffix,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="touser != null">
+        #{touser,jdbcType=BIGINT},
+      </if>
+      <if test="todate != null">
+        #{todate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="info != null">
+        #{info,jdbcType=VARCHAR},
+      </if>
+      <if test="fromuser != null">
+        #{fromuser,jdbcType=BIGINT},
+      </if>
+      <if test="fromusername != null">
+        #{fromusername,jdbcType=VARCHAR},
+      </if>
+      <if test="fromdate != null">
+        #{fromdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="resourceid != null">
+        #{resourceid,jdbcType=BIGINT},
+      </if>
+      <if test="resourcetype != null">
+        #{resourcetype,jdbcType=VARCHAR},
+      </if>
+      <if test="resourcename != null">
+        #{resourcename,jdbcType=VARCHAR},
+      </if>
+      <if test="resourcesuffix != null">
+        #{resourcesuffix,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sundeinfo.sypglass.model.MessageExample" resultType="java.lang.Long">
+    select count(*) from u_message
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update u_message
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.touser != null">
+        touser = #{record.touser,jdbcType=BIGINT},
+      </if>
+      <if test="record.todate != null">
+        todate = #{record.todate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=TINYINT},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.info != null">
+        info = #{record.info,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fromuser != null">
+        fromuser = #{record.fromuser,jdbcType=BIGINT},
+      </if>
+      <if test="record.fromusername != null">
+        fromusername = #{record.fromusername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fromdate != null">
+        fromdate = #{record.fromdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.resourceid != null">
+        resourceid = #{record.resourceid,jdbcType=BIGINT},
+      </if>
+      <if test="record.resourcetype != null">
+        resourcetype = #{record.resourcetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resourcename != null">
+        resourcename = #{record.resourcename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resourcesuffix != null">
+        resourcesuffix = #{record.resourcesuffix,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update u_message
+    set id = #{record.id,jdbcType=BIGINT},
+      touser = #{record.touser,jdbcType=BIGINT},
+      todate = #{record.todate,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=TINYINT},
+      type = #{record.type,jdbcType=TINYINT},
+      name = #{record.name,jdbcType=VARCHAR},
+      info = #{record.info,jdbcType=VARCHAR},
+      fromuser = #{record.fromuser,jdbcType=BIGINT},
+      fromusername = #{record.fromusername,jdbcType=VARCHAR},
+      fromdate = #{record.fromdate,jdbcType=TIMESTAMP},
+      resourceid = #{record.resourceid,jdbcType=BIGINT},
+      resourcetype = #{record.resourcetype,jdbcType=VARCHAR},
+      resourcename = #{record.resourcename,jdbcType=VARCHAR},
+      resourcesuffix = #{record.resourcesuffix,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sundeinfo.sypglass.model.Message">
+    update u_message
+    <set>
+      <if test="touser != null">
+        touser = #{touser,jdbcType=BIGINT},
+      </if>
+      <if test="todate != null">
+        todate = #{todate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="info != null">
+        info = #{info,jdbcType=VARCHAR},
+      </if>
+      <if test="fromuser != null">
+        fromuser = #{fromuser,jdbcType=BIGINT},
+      </if>
+      <if test="fromusername != null">
+        fromusername = #{fromusername,jdbcType=VARCHAR},
+      </if>
+      <if test="fromdate != null">
+        fromdate = #{fromdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="resourceid != null">
+        resourceid = #{resourceid,jdbcType=BIGINT},
+      </if>
+      <if test="resourcetype != null">
+        resourcetype = #{resourcetype,jdbcType=VARCHAR},
+      </if>
+      <if test="resourcename != null">
+        resourcename = #{resourcename,jdbcType=VARCHAR},
+      </if>
+      <if test="resourcesuffix != null">
+        resourcesuffix = #{resourcesuffix,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sundeinfo.sypglass.model.Message">
+    update u_message
+    set touser = #{touser,jdbcType=BIGINT},
+      todate = #{todate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT},
+      type = #{type,jdbcType=TINYINT},
+      name = #{name,jdbcType=VARCHAR},
+      info = #{info,jdbcType=VARCHAR},
+      fromuser = #{fromuser,jdbcType=BIGINT},
+      fromusername = #{fromusername,jdbcType=VARCHAR},
+      fromdate = #{fromdate,jdbcType=TIMESTAMP},
+      resourceid = #{resourceid,jdbcType=BIGINT},
+      resourcetype = #{resourcetype,jdbcType=VARCHAR},
+      resourcename = #{resourcename,jdbcType=VARCHAR},
+      resourcesuffix = #{resourcesuffix,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

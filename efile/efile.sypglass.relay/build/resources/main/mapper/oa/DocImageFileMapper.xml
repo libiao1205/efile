@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sundeinfo.sypglass.relay.mapper.oa.DocImageFileMapper">
+  <resultMap id="docImageFileResultMap" type="com.sundeinfo.sypglass.relay.model.oa.DocImageFile">
+    <constructor>
+      <arg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="docid" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="imagefileid" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="imagefilename" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="versionId" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    </constructor>
+  </resultMap>
+
+  <select id="selectDocImageFileByDocId" resultMap="docImageFileResultMap">
+    SELECT id,docid,imagefileid,imagefilename,versionId
+    FROM  DocImageFile
+    where docid= #{docid,jdbcType=INTEGER}
+  </select>
+</mapper>

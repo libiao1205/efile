@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sundeinfo.sypglass.relay.mapper.oa.FormTableMain145Mapper">
+    <resultMap id="formTableResultMap" type="com.sundeinfo.sypglass.relay.model.oa.FormTableMain">
+        <constructor>
+            <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="requestId" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="requestDate" javaType="java.lang.String" jdbcType="CHAR" />
+            <arg column="comp" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="dept" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="leader" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="additional1" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="additional2" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="additional3" javaType="java.lang.String" jdbcType="VARCHAR" />
+        </constructor>
+    </resultMap>
+
+    <select id="selectById" resultMap="formTableResultMap">
+        SELECT form.id,form.requestid,
+               form.appdate as requestdate,
+               dept.subcompanyid1 as comp,
+               form.appdept as dept,
+               form.applicant as leader,
+               form.attfile as additional1,
+               '' as additional2,
+               '' as additional3
+        FROM  formtable_main_145 form LEFT JOIN HrmDepartment dept
+		ON form.appdept = dept.id
+        where id= #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectByRequestId" resultMap="formTableResultMap">
+        SELECT form.id,form.requestid,
+               form.appdate as requestdate,
+               dept.subcompanyid1 as comp,
+               form.appdept as dept,
+               form.applicant as leader,
+               form.attfile as additional1,
+               '' as additional2,
+               '' as additional3
+        FROM  formtable_main_145 form LEFT JOIN HrmDepartment dept
+		ON form.appdept = dept.id
+        where requestid= #{requestid,jdbcType=INTEGER}
+    </select>
+
+</mapper>

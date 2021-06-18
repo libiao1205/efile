@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Gradle : efile : efile.sypglass.organization.war">
+    <output-path>$PROJECT_DIR$/efile.sypglass.organization/build/libs</output-path>
+    <properties id="gradle-properties">
+      <options external-project-path="$PROJECT_DIR$" />
+    </properties>
+    <root id="archive" name="efile.sypglass.organization.war">
+      <element id="artifact" artifact-name="Gradle : efile : efile.sypglass.organization.war (exploded)" />
+    </root>
+  </artifact>
+</component>

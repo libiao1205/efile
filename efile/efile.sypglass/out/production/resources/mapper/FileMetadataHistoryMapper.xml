@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sundeinfo.sypglass.mapper.FileMetadataHistoryMapper">
+  <resultMap id="BaseResultMap" type="com.sundeinfo.sypglass.model.FileMetadataHistory">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="fileid" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="seq" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="metadataid" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="value" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="createuserid" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="createusername" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="createdate" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="comment" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, fileid, seq, metadataid, value, createuserid, createusername, createdate, comment
+  </sql>
+  <select id="selectByExample" parameterType="com.sundeinfo.sypglass.model.FileMetadataHistoryExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from u_filemetadatahistory
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from u_filemetadatahistory
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from u_filemetadatahistory
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sundeinfo.sypglass.model.FileMetadataHistoryExample">
+    delete from u_filemetadatahistory
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sundeinfo.sypglass.model.FileMetadataHistory">
+    insert into u_filemetadatahistory (id, fileid, seq, 
+      metadataid, value, createuserid, 
+      createusername, createdate, comment
+      )
+    values (#{id,jdbcType=BIGINT}, #{fileid,jdbcType=BIGINT}, #{seq,jdbcType=INTEGER}, 
+      #{metadataid,jdbcType=BIGINT}, #{value,jdbcType=VARCHAR}, #{createuserid,jdbcType=BIGINT}, 
+      #{createusername,jdbcType=VARCHAR}, #{createdate,jdbcType=TIMESTAMP}, #{comment,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sundeinfo.sypglass.model.FileMetadataHistory">
+    insert into u_filemetadatahistory
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="fileid != null">
+        fileid,
+      </if>
+      <if test="seq != null">
+        seq,
+      </if>
+      <if test="metadataid != null">
+        metadataid,
+      </if>
+      <if test="value != null">
+        value,
+      </if>
+      <if test="createuserid != null">
+        createuserid,
+      </if>
+      <if test="createusername != null">
+        createusername,
+      </if>
+      <if test="createdate != null">
+        createdate,
+      </if>
+      <if test="comment != null">
+        comment,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="fileid != null">
+        #{fileid,jdbcType=BIGINT},
+      </if>
+      <if test="seq != null">
+        #{seq,jdbcType=INTEGER},
+      </if>
+      <if test="metadataid != null">
+        #{metadataid,jdbcType=BIGINT},
+      </if>
+      <if test="value != null">
+        #{value,jdbcType=VARCHAR},
+      </if>
+      <if test="createuserid != null">
+        #{createuserid,jdbcType=BIGINT},
+      </if>
+      <if test="createusername != null">
+        #{createusername,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="comment != null">
+        #{comment,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sundeinfo.sypglass.model.FileMetadataHistoryExample" resultType="java.lang.Long">
+    select count(*) from u_filemetadatahistory
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update u_filemetadatahistory
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.fileid != null">
+        fileid = #{record.fileid,jdbcType=BIGINT},
+      </if>
+      <if test="record.seq != null">
+        seq = #{record.seq,jdbcType=INTEGER},
+      </if>
+      <if test="record.metadataid != null">
+        metadataid = #{record.metadataid,jdbcType=BIGINT},
+      </if>
+      <if test="record.value != null">
+        value = #{record.value,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createuserid != null">
+        createuserid = #{record.createuserid,jdbcType=BIGINT},
+      </if>
+      <if test="record.createusername != null">
+        createusername = #{record.createusername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdate != null">
+        createdate = #{record.createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.comment != null">
+        comment = #{record.comment,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update u_filemetadatahistory
+    set id = #{record.id,jdbcType=BIGINT},
+      fileid = #{record.fileid,jdbcType=BIGINT},
+      seq = #{record.seq,jdbcType=INTEGER},
+      metadataid = #{record.metadataid,jdbcType=BIGINT},
+      value = #{record.value,jdbcType=VARCHAR},
+      createuserid = #{record.createuserid,jdbcType=BIGINT},
+      createusername = #{record.createusername,jdbcType=VARCHAR},
+      createdate = #{record.createdate,jdbcType=TIMESTAMP},
+      comment = #{record.comment,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sundeinfo.sypglass.model.FileMetadataHistory">
+    update u_filemetadatahistory
+    <set>
+      <if test="fileid != null">
+        fileid = #{fileid,jdbcType=BIGINT},
+      </if>
+      <if test="seq != null">
+        seq = #{seq,jdbcType=INTEGER},
+      </if>
+      <if test="metadataid != null">
+        metadataid = #{metadataid,jdbcType=BIGINT},
+      </if>
+      <if test="value != null">
+        value = #{value,jdbcType=VARCHAR},
+      </if>
+      <if test="createuserid != null">
+        createuserid = #{createuserid,jdbcType=BIGINT},
+      </if>
+      <if test="createusername != null">
+        createusername = #{createusername,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        createdate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="comment != null">
+        comment = #{comment,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sundeinfo.sypglass.model.FileMetadataHistory">
+    update u_filemetadatahistory
+    set fileid = #{fileid,jdbcType=BIGINT},
+      seq = #{seq,jdbcType=INTEGER},
+      metadataid = #{metadataid,jdbcType=BIGINT},
+      value = #{value,jdbcType=VARCHAR},
+      createuserid = #{createuserid,jdbcType=BIGINT},
+      createusername = #{createusername,jdbcType=VARCHAR},
+      createdate = #{createdate,jdbcType=TIMESTAMP},
+      comment = #{comment,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

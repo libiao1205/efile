@@ -1,0 +1,9 @@
+rootProject.name = 'efile'
+include 'efile.sypglass'
+include 'sundeinfo.security'
+include 'sundeinfo.core'
+include 'sundeinfo.file'
+include 'efile.sypglass.relay'
+include 'efile.sypglass.solr'
+include 'efile.sypglass.organization'
+

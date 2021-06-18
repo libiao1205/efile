@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sundeinfo.sypglass.mapper.ActionHistoryMapper">
+  <resultMap id="BaseResultMap" type="com.sundeinfo.sypglass.model.ActionHistory">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="resourceid" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="kind" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="seq" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="action" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="userid" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="username" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="updatedate" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, resourceid, kind, seq, action, userid, username, updatedate
+  </sql>
+  <select id="selectByExample" parameterType="com.sundeinfo.sypglass.model.ActionHistoryExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from u_actionhistory
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from u_actionhistory
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from u_actionhistory
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sundeinfo.sypglass.model.ActionHistoryExample">
+    delete from u_actionhistory
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sundeinfo.sypglass.model.ActionHistory" keyProperty="id"
+          keyColumn="ID" useGeneratedKeys="true">
+    insert into u_actionhistory (id, resourceid, kind, 
+      seq, action, userid, 
+      username, updatedate)
+    values (#{id,jdbcType=BIGINT}, #{resourceid,jdbcType=BIGINT}, #{kind,jdbcType=VARCHAR}, 
+      #{seq,jdbcType=INTEGER}, #{action,jdbcType=VARCHAR}, #{userid,jdbcType=BIGINT}, 
+      #{username,jdbcType=VARCHAR}, #{updatedate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sundeinfo.sypglass.model.ActionHistory" keyProperty="id"
+          keyColumn="ID" useGeneratedKeys="true">
+    insert into u_actionhistory
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="resourceid != null">
+        resourceid,
+      </if>
+      <if test="kind != null">
+        kind,
+      </if>
+      <if test="seq != null">
+        seq,
+      </if>
+      <if test="action != null">
+        action,
+      </if>
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="updatedate != null">
+        updatedate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="resourceid != null">
+        #{resourceid,jdbcType=BIGINT},
+      </if>
+      <if test="kind != null">
+        #{kind,jdbcType=VARCHAR},
+      </if>
+      <if test="seq != null">
+        #{seq,jdbcType=INTEGER},
+      </if>
+      <if test="action != null">
+        #{action,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedate != null">
+        #{updatedate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sundeinfo.sypglass.model.ActionHistoryExample" resultType="java.lang.Long">
+    select count(*) from u_actionhistory
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update u_actionhistory
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.resourceid != null">
+        resourceid = #{record.resourceid,jdbcType=BIGINT},
+      </if>
+      <if test="record.kind != null">
+        kind = #{record.kind,jdbcType=VARCHAR},
+      </if>
+      <if test="record.seq != null">
+        seq = #{record.seq,jdbcType=INTEGER},
+      </if>
+      <if test="record.action != null">
+        action = #{record.action,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userid != null">
+        userid = #{record.userid,jdbcType=BIGINT},
+      </if>
+      <if test="record.username != null">
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updatedate != null">
+        updatedate = #{record.updatedate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update u_actionhistory
+    set id = #{record.id,jdbcType=BIGINT},
+      resourceid = #{record.resourceid,jdbcType=BIGINT},
+      kind = #{record.kind,jdbcType=VARCHAR},
+      seq = #{record.seq,jdbcType=INTEGER},
+      action = #{record.action,jdbcType=VARCHAR},
+      userid = #{record.userid,jdbcType=BIGINT},
+      username = #{record.username,jdbcType=VARCHAR},
+      updatedate = #{record.updatedate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sundeinfo.sypglass.model.ActionHistory">
+    update u_actionhistory
+    <set>
+      <if test="resourceid != null">
+        resourceid = #{resourceid,jdbcType=BIGINT},
+      </if>
+      <if test="kind != null">
+        kind = #{kind,jdbcType=VARCHAR},
+      </if>
+      <if test="seq != null">
+        seq = #{seq,jdbcType=INTEGER},
+      </if>
+      <if test="action != null">
+        action = #{action,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        userid = #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedate != null">
+        updatedate = #{updatedate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sundeinfo.sypglass.model.ActionHistory">
+    update u_actionhistory
+    set resourceid = #{resourceid,jdbcType=BIGINT},
+      kind = #{kind,jdbcType=VARCHAR},
+      seq = #{seq,jdbcType=INTEGER},
+      action = #{action,jdbcType=VARCHAR},
+      userid = #{userid,jdbcType=BIGINT},
+      username = #{username,jdbcType=VARCHAR},
+      updatedate = #{updatedate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sundeinfo.sypglass.mapper.FileAccessoryHistoryMapper">
+  <resultMap id="BaseResultMap" type="com.sundeinfo.sypglass.model.FileAccessoryHistory">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="type" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="fileid" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="seq" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="folderid" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="suffix" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="status" javaType="java.lang.Byte" jdbcType="TINYINT" />
+      <arg column="size" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="createuserid" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="createusername" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="createdate" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="comment" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="saveid" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="savemd5" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="savelength" javaType="java.lang.Long" jdbcType="BIGINT" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, type, fileid, seq, folderid, name, suffix, status, size, createuserid, createusername, 
+    createdate, comment, saveid, savemd5, savelength
+  </sql>
+  <select id="selectByExample" parameterType="com.sundeinfo.sypglass.model.FileAccessoryHistoryExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from u_fileaccessoryhistory
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from u_fileaccessoryhistory
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from u_fileaccessoryhistory
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sundeinfo.sypglass.model.FileAccessoryHistoryExample">
+    delete from u_fileaccessoryhistory
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sundeinfo.sypglass.model.FileAccessoryHistory">
+    insert into u_fileaccessoryhistory (id, type, fileid, 
+      seq, folderid, name, 
+      suffix, status, size, 
+      createuserid, createusername, createdate, 
+      comment, saveid, savemd5, 
+      savelength)
+    values (#{id,jdbcType=BIGINT}, #{type,jdbcType=INTEGER}, #{fileid,jdbcType=BIGINT}, 
+      #{seq,jdbcType=INTEGER}, #{folderid,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
+      #{suffix,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, #{size,jdbcType=VARCHAR}, 
+      #{createuserid,jdbcType=BIGINT}, #{createusername,jdbcType=VARCHAR}, #{createdate,jdbcType=TIMESTAMP}, 
+      #{comment,jdbcType=VARCHAR}, #{saveid,jdbcType=VARCHAR}, #{savemd5,jdbcType=VARCHAR}, 
+      #{savelength,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sundeinfo.sypglass.model.FileAccessoryHistory">
+    insert into u_fileaccessoryhistory
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="fileid != null">
+        fileid,
+      </if>
+      <if test="seq != null">
+        seq,
+      </if>
+      <if test="folderid != null">
+        folderid,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="suffix != null">
+        suffix,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="size != null">
+        size,
+      </if>
+      <if test="createuserid != null">
+        createuserid,
+      </if>
+      <if test="createusername != null">
+        createusername,
+      </if>
+      <if test="createdate != null">
+        createdate,
+      </if>
+      <if test="comment != null">
+        comment,
+      </if>
+      <if test="saveid != null">
+        saveid,
+      </if>
+      <if test="savemd5 != null">
+        savemd5,
+      </if>
+      <if test="savelength != null">
+        savelength,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="fileid != null">
+        #{fileid,jdbcType=BIGINT},
+      </if>
+      <if test="seq != null">
+        #{seq,jdbcType=INTEGER},
+      </if>
+      <if test="folderid != null">
+        #{folderid,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="suffix != null">
+        #{suffix,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="size != null">
+        #{size,jdbcType=VARCHAR},
+      </if>
+      <if test="createuserid != null">
+        #{createuserid,jdbcType=BIGINT},
+      </if>
+      <if test="createusername != null">
+        #{createusername,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="comment != null">
+        #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="saveid != null">
+        #{saveid,jdbcType=VARCHAR},
+      </if>
+      <if test="savemd5 != null">
+        #{savemd5,jdbcType=VARCHAR},
+      </if>
+      <if test="savelength != null">
+        #{savelength,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sundeinfo.sypglass.model.FileAccessoryHistoryExample" resultType="java.lang.Long">
+    select count(*) from u_fileaccessoryhistory
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update u_fileaccessoryhistory
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.fileid != null">
+        fileid = #{record.fileid,jdbcType=BIGINT},
+      </if>
+      <if test="record.seq != null">
+        seq = #{record.seq,jdbcType=INTEGER},
+      </if>
+      <if test="record.folderid != null">
+        folderid = #{record.folderid,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.suffix != null">
+        suffix = #{record.suffix,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.size != null">
+        size = #{record.size,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createuserid != null">
+        createuserid = #{record.createuserid,jdbcType=BIGINT},
+      </if>
+      <if test="record.createusername != null">
+        createusername = #{record.createusername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdate != null">
+        createdate = #{record.createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.comment != null">
+        comment = #{record.comment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saveid != null">
+        saveid = #{record.saveid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.savemd5 != null">
+        savemd5 = #{record.savemd5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.savelength != null">
+        savelength = #{record.savelength,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update u_fileaccessoryhistory
+    set id = #{record.id,jdbcType=BIGINT},
+      type = #{record.type,jdbcType=INTEGER},
+      fileid = #{record.fileid,jdbcType=BIGINT},
+      seq = #{record.seq,jdbcType=INTEGER},
+      folderid = #{record.folderid,jdbcType=BIGINT},
+      name = #{record.name,jdbcType=VARCHAR},
+      suffix = #{record.suffix,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=TINYINT},
+      size = #{record.size,jdbcType=VARCHAR},
+      createuserid = #{record.createuserid,jdbcType=BIGINT},
+      createusername = #{record.createusername,jdbcType=VARCHAR},
+      createdate = #{record.createdate,jdbcType=TIMESTAMP},
+      comment = #{record.comment,jdbcType=VARCHAR},
+      saveid = #{record.saveid,jdbcType=VARCHAR},
+      savemd5 = #{record.savemd5,jdbcType=VARCHAR},
+      savelength = #{record.savelength,jdbcType=BIGINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sundeinfo.sypglass.model.FileAccessoryHistory">
+    update u_fileaccessoryhistory
+    <set>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="fileid != null">
+        fileid = #{fileid,jdbcType=BIGINT},
+      </if>
+      <if test="seq != null">
+        seq = #{seq,jdbcType=INTEGER},
+      </if>
+      <if test="folderid != null">
+        folderid = #{folderid,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="suffix != null">
+        suffix = #{suffix,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="size != null">
+        size = #{size,jdbcType=VARCHAR},
+      </if>
+      <if test="createuserid != null">
+        createuserid = #{createuserid,jdbcType=BIGINT},
+      </if>
+      <if test="createusername != null">
+        createusername = #{createusername,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        createdate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="comment != null">
+        comment = #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="saveid != null">
+        saveid = #{saveid,jdbcType=VARCHAR},
+      </if>
+      <if test="savemd5 != null">
+        savemd5 = #{savemd5,jdbcType=VARCHAR},
+      </if>
+      <if test="savelength != null">
+        savelength = #{savelength,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sundeinfo.sypglass.model.FileAccessoryHistory">
+    update u_fileaccessoryhistory
+    set type = #{type,jdbcType=INTEGER},
+      fileid = #{fileid,jdbcType=BIGINT},
+      seq = #{seq,jdbcType=INTEGER},
+      folderid = #{folderid,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      suffix = #{suffix,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      size = #{size,jdbcType=VARCHAR},
+      createuserid = #{createuserid,jdbcType=BIGINT},
+      createusername = #{createusername,jdbcType=VARCHAR},
+      createdate = #{createdate,jdbcType=TIMESTAMP},
+      comment = #{comment,jdbcType=VARCHAR},
+      saveid = #{saveid,jdbcType=VARCHAR},
+      savemd5 = #{savemd5,jdbcType=VARCHAR},
+      savelength = #{savelength,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

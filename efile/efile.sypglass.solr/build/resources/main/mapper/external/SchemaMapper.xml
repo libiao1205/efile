@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sundeinfo.sypglass.solr.mapper.external.SchemaMapper">
+  <select id="selectTable" resultType="java.util.LinkedHashMap">
+    SELECT
+      DBSCHEMA.TABLE_SCHEMA 'dbName',
+      DBSCHEMA.TABLE_NAME 'tableName',
+      DBSCHEMA.TABLE_ROWS 'tableRows',
+      DBSCHEMA.CREATE_TIME 'createTime',
+      DBSCHEMA.TABLE_COMMENT 'tableComment'
+    FROM INFORMATION_SCHEMA.TABLES DBSCHEMA
+    WHERE
+      DBSCHEMA.TABLE_SCHEMA = #{dbName}
+  </select>
+
+  <select id="selectColumn" resultType="java.util.LinkedHashMap">
+    SELECT
+        A.TABLE_SCHEMA 'dbName',
+        A.TABLE_NAME 'tableName',
+        A.COLUMN_NAME 'columnName',
+        A.ORDINAL_POSITION 'ordinalPosition',
+        A.DATA_TYPE 'dataType',
+        A.COLUMN_TYPE 'columnType',
+        A.COLUMN_COMMENT 'columnComment'
+    FROM INFORMATION_SCHEMA.COLUMNS A
+    WHERE A.TABLE_SCHEMA= #{dbName}
+      AND A.TABLE_NAME = #{tableName}
+    ORDER BY A.TABLE_SCHEMA,A.TABLE_NAME,A.ORDINAL_POSITION
+  </select>
+
+
+    <select id="selectTableSqlServer" resultType="java.util.LinkedHashMap">
+    SELECT
+      DBSCHEMA.TABLE_CATALOG 'dbName',
+      DBSCHEMA.TABLE_NAME 'tableName'
+    FROM INFORMATION_SCHEMA.TABLES DBSCHEMA
+    WHERE
+      DBSCHEMA.TABLE_CATALOG = #{dbName}
+      AND DBSCHEMA.TABLE_TYPE != 'VIEW'
+  </select>
+
+    <select id="selectColumnSqlServer" resultType="java.util.LinkedHashMap">
+    SELECT
+        A.TABLE_CATALOG 'dbName',
+        A.TABLE_NAME 'tableName',
+        A.COLUMN_NAME 'columnName',
+        A.ORDINAL_POSITION 'ordinalPosition',
+        A.DATA_TYPE 'dataType'
+    FROM INFORMATION_SCHEMA.COLUMNS A
+    WHERE A.TABLE_CATALOG= #{dbName}
+      AND A.TABLE_NAME = #{tableName}
+    ORDER BY A.TABLE_SCHEMA,A.TABLE_NAME,A.ORDINAL_POSITION
+  </select>
+</mapper>
